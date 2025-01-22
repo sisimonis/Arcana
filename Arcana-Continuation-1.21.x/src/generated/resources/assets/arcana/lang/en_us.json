@@ -1,0 +1,13 @@
+{
+  "arcana.state.gaseous": "Gaseous",
+  "arcana.state.liquid": "Liquid",
+  "arcana.state.solid": "Solid",
+  "arcana.structure.amorphous": "Amorphous",
+  "arcana.structure.crystalline": "Crystalline",
+  "arcana.structure.highly_viscous": "Highly Viscous",
+  "arcana.structure.non_newtonian": "Non-Newtonian",
+  "arcana.structure.pulverized": "Pulverized",
+  "arcana.structure.pulverized_rough": "Pulverized (Rough)",
+  "arcana.structure.super_saturated": "Super-Saturated",
+  "tooltip.arcana.shift_to_view": "Press shift to view item structure"
+}
