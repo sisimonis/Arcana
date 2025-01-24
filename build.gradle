@@ -120,7 +120,6 @@ def replaceProperties = [
 ]
 processResources {
     inputs.properties replaceProperties
-    replaceProperties.put "project", project
 
     filesMatching(resourceTargets) {
         expand replaceProperties
