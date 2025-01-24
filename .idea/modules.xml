@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Arcana.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Arcana.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.exodusstudio.arcana.Arcana.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.exodusstudio.arcana.Arcana.main.iml" />
     </modules>
   </component>
 </project>

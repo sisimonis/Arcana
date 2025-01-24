@@ -9,5 +9,8 @@
   "arcana.structure.pulverized": "Pulverized",
   "arcana.structure.pulverized_rough": "Pulverized (Rough)",
   "arcana.structure.super_saturated": "Super-Saturated",
-  "tooltip.arcana.shift_to_view": "Press shift to view item structure"
+  "tooltip.arcana.shift_to_view": "Press shift to view item structure",
+
+  "key.categories.arcana": "Arcana",
+  "key.arcana.memoriam": "Interior Memoriam"
 }
