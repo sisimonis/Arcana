@@ -1,6 +1,6 @@
-package dev.zestyblaze.arcana.event;
+package org.exodusstudio.arcana.event;
 
-import dev.zestyblaze.arcana.Arcana;
+import org.exodusstudio.arcana.Arcana;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Arcana-Continuation-1.21.x.iml" filepath="$PROJECT_DIR$/.idea/Arcana-Continuation-1.21.x.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Arcana.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Arcana.main.iml" />
     </modules>
   </component>
 </project>

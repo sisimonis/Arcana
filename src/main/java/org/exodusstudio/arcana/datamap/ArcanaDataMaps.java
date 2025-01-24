@@ -1,6 +1,6 @@
-package dev.zestyblaze.arcana.datamap;
+package org.exodusstudio.arcana.datamap;
 
-import dev.zestyblaze.arcana.Arcana;
+import org.exodusstudio.arcana.Arcana;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;

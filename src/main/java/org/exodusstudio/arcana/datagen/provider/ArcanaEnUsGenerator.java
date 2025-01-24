@@ -1,6 +1,6 @@
-package dev.zestyblaze.arcana.datagen.provider;
+package org.exodusstudio.arcana.datagen.provider;
 
-import dev.zestyblaze.arcana.Arcana;
+import org.exodusstudio.arcana.Arcana;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 

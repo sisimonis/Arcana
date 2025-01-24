@@ -1,9 +1,9 @@
-package dev.zestyblaze.arcana.datagen;
+package org.exodusstudio.arcana.datagen;
 
-import dev.zestyblaze.arcana.Arcana;
-import dev.zestyblaze.arcana.datagen.provider.ArcanaDataMapGenerator;
-import dev.zestyblaze.arcana.datagen.provider.ArcanaEnUsGenerator;
-import dev.zestyblaze.arcana.datagen.provider.ArcanaRegistrySetGenerator;
+import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.datagen.provider.ArcanaDataMapGenerator;
+import org.exodusstudio.arcana.datagen.provider.ArcanaEnUsGenerator;
+import org.exodusstudio.arcana.datagen.provider.ArcanaRegistrySetGenerator;
 import net.minecraft.data.DataGenerator;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

@@ -1,8 +1,8 @@
-package dev.zestyblaze.arcana.event;
+package org.exodusstudio.arcana.event;
 
-import dev.zestyblaze.arcana.Arcana;
-import dev.zestyblaze.arcana.data.State;
-import dev.zestyblaze.arcana.data.Structure;
+import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.data.State;
+import org.exodusstudio.arcana.data.Structure;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceKey;

@@ -1,9 +1,9 @@
-package dev.zestyblaze.arcana.datagen.provider;
+package org.exodusstudio.arcana.datagen.provider;
 
-import dev.zestyblaze.arcana.Arcana;
-import dev.zestyblaze.arcana.event.ArcanaRegistries;
-import dev.zestyblaze.arcana.world.States;
-import dev.zestyblaze.arcana.world.Structures;
+import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.event.ArcanaRegistries;
+import org.exodusstudio.arcana.world.States;
+import org.exodusstudio.arcana.world.Structures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.PackOutput;

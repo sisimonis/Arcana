@@ -1,12 +1,12 @@
-package dev.zestyblaze.arcana.datagen.provider;
+package org.exodusstudio.arcana.datagen.provider;
 
-import dev.zestyblaze.arcana.data.State;
-import dev.zestyblaze.arcana.data.Structure;
-import dev.zestyblaze.arcana.datamap.ArcanaDataHolder;
-import dev.zestyblaze.arcana.datamap.ArcanaDataMaps;
-import dev.zestyblaze.arcana.event.ArcanaRegistries;
-import dev.zestyblaze.arcana.world.States;
-import dev.zestyblaze.arcana.world.Structures;
+import org.exodusstudio.arcana.data.State;
+import org.exodusstudio.arcana.data.Structure;
+import org.exodusstudio.arcana.datamap.ArcanaDataHolder;
+import org.exodusstudio.arcana.datamap.ArcanaDataMaps;
+import org.exodusstudio.arcana.event.ArcanaRegistries;
+import org.exodusstudio.arcana.world.States;
+import org.exodusstudio.arcana.world.Structures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

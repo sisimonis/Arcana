@@ -1,9 +1,9 @@
-package dev.zestyblaze.arcana.event;
+package org.exodusstudio.arcana.event;
 
-import dev.zestyblaze.arcana.Arcana;
-import dev.zestyblaze.arcana.data.State;
-import dev.zestyblaze.arcana.data.Structure;
-import dev.zestyblaze.arcana.datamap.ArcanaDataMaps;
+import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.data.State;
+import org.exodusstudio.arcana.data.Structure;
+import org.exodusstudio.arcana.datamap.ArcanaDataMaps;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;

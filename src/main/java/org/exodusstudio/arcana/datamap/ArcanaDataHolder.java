@@ -1,10 +1,10 @@
-package dev.zestyblaze.arcana.datamap;
+package org.exodusstudio.arcana.datamap;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.zestyblaze.arcana.data.State;
-import dev.zestyblaze.arcana.data.Structure;
-import dev.zestyblaze.arcana.event.ArcanaRegistries;
+import org.exodusstudio.arcana.data.State;
+import org.exodusstudio.arcana.data.Structure;
+import org.exodusstudio.arcana.event.ArcanaRegistries;
 import net.minecraft.core.Holder;
 
 import java.util.ArrayList;

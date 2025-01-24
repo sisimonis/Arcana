@@ -1,8 +1,8 @@
-package dev.zestyblaze.arcana.world;
+package org.exodusstudio.arcana.world;
 
-import dev.zestyblaze.arcana.Arcana;
-import dev.zestyblaze.arcana.data.State;
-import dev.zestyblaze.arcana.event.ArcanaRegistries;
+import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.data.State;
+import org.exodusstudio.arcana.event.ArcanaRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 

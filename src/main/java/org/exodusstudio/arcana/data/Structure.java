@@ -1,4 +1,4 @@
-package dev.zestyblaze.arcana.data;
+package org.exodusstudio.arcana.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
