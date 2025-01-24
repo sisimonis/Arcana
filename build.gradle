@@ -79,53 +79,23 @@ configurations {
 dependencies {
 }
 
-var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
-    var replaceProperties = [
-            minecraft_version      : minecraft_version,
-            minecraft_version_range: minecraft_version_range,
-            neo_version            : neo_version,
-            neo_version_range      : neo_version_range,
-            loader_version_range   : loader_version_range,
-            mod_id                 : mod_id,
-            mod_name               : mod_name,
-            mod_license            : mod_license,
-            mod_version            : mod_version,
-            mod_authors            : mod_authors,
-            mod_description        : mod_description
-    ]
-
-    inputs.property 'version', project.version
-
-    filesMatching('META-INF/neoforge.mods.toml') {
-        expand version: project.version
-    }
-
-    inputs.properties replaceProperties
-    expand replaceProperties
-    from "src/main/templates"
-    into "build/generated/sources/modMetadata"
-
-
-}
-
-sourceSets.main.resources.srcDir generateModMetadata
-neoForge.ideSyncTask generateModMetadata
+jar.finalizedBy("reobfJar")
 
 publishing {
     publications {
-        register('mavenJava', MavenPublication) {
-            from components.java
+        mavenJava(MavenPublication) {
+            artifact jar
         }
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/repo"
+            url "file://${project.projectDir}/mcmodsrepo"
         }
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+    options.encoding = "UTF-8"
 }
 
 idea {
@@ -134,3 +104,41 @@ idea {
         downloadJavadoc = true
     }
 }
+
+def resourceTargets = ["META-INF/neoforge.mods.toml", /*"pack.mcmeta"*/]
+def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
+def replaceProperties = [
+        minecraft_version      : minecraft_version,
+        minecraft_version_range: minecraft_version_range,
+        neo_version            : neo_version,
+        neo_version_range      : neo_version_range,
+        loader_version_range   : loader_version_range,
+        mod_id                 : mod_id,
+        mod_name               : mod_name,
+        mod_license            : mod_license,
+        mod_version            : mod_version,
+        mod_authors            : mod_authors,
+        mod_description        : mod_description
+]
+processResources {
+    inputs.properties replaceProperties
+    replaceProperties.put "project", project
+
+    filesMatching(resourceTargets) {
+        expand replaceProperties
+    }
+
+    intoTargets.each { target ->
+        if (file(target).exists()) {
+            copy {
+                from(sourceSets.main.resources) {
+                    include resourceTargets
+                    expand replaceProperties
+                }
+                into target
+            }
+        }
+    }
+}
+
+
