@@ -4,7 +4,7 @@ license="${mod_license}"
 issueTrackerURL="https://github.com/ZestyBlaze/Arcana-Continuation/issues"
 
 [[mods]]
-modId="${mod_id}"
+modId="arcana"
 version="${mod_version}"
 displayName="${mod_name}"
 updateJSONURL="https://raw.githubusercontent.com/ZestyBlaze/Arcana-Continuation/refs/heads/1.21.x/update.json"
@@ -17,14 +17,14 @@ description='''${mod_description}'''
 #[[mixins]]
 #config="${mod_id}.mixins.json"
 
-[[dependencies.${mod_id}]]
+[[dependencies.arcana]]
     modId="neoforge"
     type="required"
     versionRange="${neo_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.arcana]]
     modId="minecraft"
     type="required"
     versionRange="${minecraft_version_range}"
