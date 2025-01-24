@@ -79,8 +79,6 @@ configurations {
 dependencies {
 }
 
-jar.finalizedBy("reobfJar")
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
