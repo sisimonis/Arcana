@@ -19,4 +19,5 @@ public final class Keybindings {
             InputConstants.getKey(InputConstants.KEY_L, -1),
             CATEGORY
     );
+
 }
