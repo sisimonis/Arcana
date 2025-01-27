@@ -35,7 +35,7 @@ public class ArcanaScribblingToolItem extends Item {
 
             for(int i = 0; i < playerInventory.getContainerSize(); i++) {
                 ItemStack currentItemStack = playerInventory.getItem(i);
-                if (currentItemStack.getItem().equals(Items.MAP)) {
+                if (currentItemStack.getItem().equals(Items.PAPER)) {
                     itemFound = true;
                     itemStack = currentItemStack;
                     itemStackIndex = i;
