@@ -1,8 +1,12 @@
 package org.exodusstudio.arcana.datagen.provider;
 
+import net.minecraft.world.item.Item;
 import org.exodusstudio.arcana.Arcana;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import org.exodusstudio.arcana.item.ArcanaItems;
+
+import java.util.function.Supplier;
 
 public class ArcanaEnUsGenerator extends LanguageProvider {
     public ArcanaEnUsGenerator(PackOutput output) {
@@ -11,6 +15,7 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+
         add("arcana.state.solid", "Solid");
         add("arcana.state.liquid", "Liquid");
         add("arcana.state.gaseous", "Gaseous");
@@ -24,5 +29,9 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
         add("arcana.structure.highly_viscous", "Highly Viscous");
 
         add("tooltip.arcana.shift_to_view", "Press shift to view item structure");
+        add("itemGroup.arcana.arcana_creative_tab", "Arcana");
+        addItem(ArcanaItems.SCRIBBLING_TOOL, "Scribbling Tool");
+        addItem(ArcanaItems.SCRIBBLED_NOTE, "Scribbled Note");
+        addItem(ArcanaItems.NHIL_CRYSTAL, "Nhil Crystal");
     }
 }

@@ -1,14 +1,31 @@
 package org.exodusstudio.arcana.datagen;
 
-//@EventBusSubscriber(modid = Arcana.MODID, bus = EventBusSubscriber.Bus.MOD)
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.datagen.provider.ArcanaEnUsGenerator;
+import org.exodusstudio.arcana.datagen.provider.ArcanaItemModelProvider;
+
+import java.util.concurrent.CompletableFuture;
+
+@EventBusSubscriber(modid = Arcana.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ArcanaDatagen {
-    /*@SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator gen = event.getGenerator();
 
-        gen.addProvider(event.includeClient(), new ArcanaEnUsGenerator(gen.getPackOutput()));
+    @SubscribeEvent
+    public static void gatherData(GatherDataEvent.Client event)
+    {
+        //New 1.21.4 data gen function
+        PackOutput output = event.getGenerator().getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
+        event.addProvider(new ArcanaEnUsGenerator(output));
+        event.addProvider(new ArcanaItemModelProvider(output));
+
+        /*
         var prov = gen.addProvider(event.includeServer(), new ArcanaRegistrySetGenerator(gen.getPackOutput(), event.getLookupProvider())).getRegistryProvider();
-        gen.addProvider(event.includeServer(), new ArcanaDataMapGenerator(gen.getPackOutput(), prov));
-    }*/
+        gen.addProvider(event.includeServer(), new ArcanaDataMapGenerator(gen.getPackOutput(), prov));*/
+    }
 }
