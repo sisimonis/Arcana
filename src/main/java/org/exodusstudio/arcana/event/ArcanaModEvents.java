@@ -14,7 +14,8 @@ import org.exodusstudio.arcana.client.gui.InteriumMemoriamScreen;
 @EventBusSubscriber(modid = Arcana.MODID)
 public class ArcanaModEvents {
 
-
+    private static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "interior_memoriam_shader" );
+    private static final ResourceLocation TEST = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "test");
 
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
@@ -23,7 +24,7 @@ public class ArcanaModEvents {
         if (Keybindings.INSTANCE.InteriorMemoriam.isDown() && player != null) {
             Keybindings.INSTANCE.InteriorMemoriam.consumeClick();
             player.playSound(SoundEvents.APPLY_EFFECT_BAD_OMEN);
-            Minecraft.getInstance().gameRenderer.setPostEffect(ResourceLocation.fromNamespaceAndPath(Arcana.MODID,"interior_memoriam_shader"));
+            Minecraft.getInstance().gameRenderer.setPostEffect(BACKGROUND);
             minecraft.setScreen(new InteriumMemoriamScreen());
 
         }
