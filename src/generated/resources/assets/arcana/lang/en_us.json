@@ -1,4 +1,5 @@
 {
+  "arcana.message.scribbling_tool_no_map": "You must have an empty map to take notes",
   "arcana.state.gaseous": "Gaseous",
   "arcana.state.liquid": "Liquid",
   "arcana.state.solid": "Solid",

@@ -9,7 +9,10 @@ import org.exodusstudio.arcana.Arcana;
 public class ArcanaItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Arcana.MODID);
 
-    public static final DeferredItem<Item> SCRIBBLING_TOOL = ITEMS.registerSimpleItem("scribbling_tool");
+    public static final DeferredItem<Item> SCRIBBLING_TOOL = ITEMS.registerItem(
+            "scribbling_tool",
+            ArcanaScribblingToolItem::new,
+            new Item.Properties());
     public static final DeferredItem<Item> SCRIBBLED_NOTE = ITEMS.registerSimpleItem("scribbled_note");
     public static final DeferredItem<Item> NHIL_CRYSTAL = ITEMS.registerSimpleItem("nhil_crystal");
 
