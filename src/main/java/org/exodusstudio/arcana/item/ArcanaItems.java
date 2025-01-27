@@ -12,8 +12,11 @@ public class ArcanaItems {
     public static final DeferredItem<Item> SCRIBBLING_TOOL = ITEMS.registerItem(
             "scribbling_tool",
             ArcanaScribblingToolItem::new,
-            new Item.Properties());
-    public static final DeferredItem<Item> SCRIBBLED_NOTE = ITEMS.registerSimpleItem("scribbled_note");
+            new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> SCRIBBLED_NOTE = ITEMS.registerItem(
+            "scribbled_note",
+            ArcanaScribbledNoteItem::new,
+            new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> NHIL_CRYSTAL = ITEMS.registerSimpleItem("nhil_crystal");
 
     public static void register(IEventBus eventBus)
