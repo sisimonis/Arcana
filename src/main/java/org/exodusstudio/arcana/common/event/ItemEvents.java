@@ -4,7 +4,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -47,11 +53,21 @@ public class ItemEvents {
 
     @SubscribeEvent
     public static void entityLeaveLevelEvent(EntityLeaveLevelEvent event) {
-        if (event.getEntity() instanceof ItemEntity itemEntity && event.getLevel().getBlockState(itemEntity.blockPosition()).is(Blocks.FIRE)) {
-            if (itemEntity.getItem().is(TagRegistry.FUNDAMENTAL)) {
-                // TODO : spawn entity
-                Arcana.LOGGER.error("Entity throwed in fire : {}", itemEntity);
+        if (!event.getLevel().isClientSide()) {
+            if (event.getEntity() instanceof ItemEntity itemEntity && event.getLevel().getBlockState(itemEntity.blockPosition()).is(Blocks.FIRE)) {
+                if (itemEntity.getItem().is(TagRegistry.FUNDAMENTAL)) {
+                    // TODO : add particles
+                    Zombie zombie = EntityType.ZOMBIE.create(event.getLevel(), EntitySpawnReason.EVENT);
+                    if (zombie != null) {
+                        zombie.setNoAi(true);
+                        zombie.setNoGravity(true);
+                        zombie.setInvulnerable(true);
+                        zombie.setPos(itemEntity.getX(), itemEntity.getY() + 1, itemEntity.getZ());
+                        event.getLevel().addFreshEntity(zombie);
+                    }
+                }
             }
         }
+
     }
 }
