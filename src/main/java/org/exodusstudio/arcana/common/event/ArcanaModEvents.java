@@ -1,4 +1,4 @@
-package org.exodusstudio.arcana.event;
+package org.exodusstudio.arcana.common.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;

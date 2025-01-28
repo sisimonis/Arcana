@@ -1,9 +1,9 @@
-package org.exodusstudio.arcana.event;
+package org.exodusstudio.arcana.common.event;
 
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.data.State;
-import org.exodusstudio.arcana.data.Structure;
-import org.exodusstudio.arcana.datamap.ArcanaDataMaps;
+import org.exodusstudio.arcana.common.data.State;
+import org.exodusstudio.arcana.common.data.Structure;
+import org.exodusstudio.arcana.common.datamap.ArcanaDataMaps;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;

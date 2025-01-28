@@ -1,8 +1,8 @@
-package org.exodusstudio.arcana.world;
+package org.exodusstudio.arcana.common.world;
 
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.data.Structure;
-import org.exodusstudio.arcana.event.ArcanaRegistries;
+import org.exodusstudio.arcana.common.data.Structure;
+import org.exodusstudio.arcana.common.event.ArcanaRegistries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 

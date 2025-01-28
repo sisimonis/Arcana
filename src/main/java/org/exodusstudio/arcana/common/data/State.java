@@ -1,4 +1,4 @@
-package org.exodusstudio.arcana.data;
+package org.exodusstudio.arcana.common.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

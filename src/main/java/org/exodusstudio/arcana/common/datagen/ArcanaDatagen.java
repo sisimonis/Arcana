@@ -1,4 +1,4 @@
-package org.exodusstudio.arcana.datagen;
+package org.exodusstudio.arcana.common.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -6,8 +6,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.datagen.provider.ArcanaEnUsGenerator;
-import org.exodusstudio.arcana.datagen.provider.ArcanaItemModelProvider;
+import org.exodusstudio.arcana.common.datagen.provider.ArcanaEnUsGenerator;
+import org.exodusstudio.arcana.common.datagen.provider.ArcanaItemModelProvider;
 
 import java.util.concurrent.CompletableFuture;
 

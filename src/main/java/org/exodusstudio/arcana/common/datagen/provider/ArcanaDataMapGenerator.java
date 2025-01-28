@@ -1,12 +1,12 @@
-package org.exodusstudio.arcana.datagen.provider;
+package org.exodusstudio.arcana.common.datagen.provider;
 
-import org.exodusstudio.arcana.data.State;
-import org.exodusstudio.arcana.data.Structure;
-import org.exodusstudio.arcana.datamap.ArcanaDataHolder;
-import org.exodusstudio.arcana.datamap.ArcanaDataMaps;
-import org.exodusstudio.arcana.event.ArcanaRegistries;
-import org.exodusstudio.arcana.world.States;
-import org.exodusstudio.arcana.world.Structures;
+import org.exodusstudio.arcana.common.data.State;
+import org.exodusstudio.arcana.common.data.Structure;
+import org.exodusstudio.arcana.common.datamap.ArcanaDataHolder;
+import org.exodusstudio.arcana.common.datamap.ArcanaDataMaps;
+import org.exodusstudio.arcana.common.event.ArcanaRegistries;
+import org.exodusstudio.arcana.common.world.States;
+import org.exodusstudio.arcana.common.world.Structures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

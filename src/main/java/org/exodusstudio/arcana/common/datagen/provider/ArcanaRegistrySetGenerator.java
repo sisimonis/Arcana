@@ -1,9 +1,9 @@
-package org.exodusstudio.arcana.datagen.provider;
+package org.exodusstudio.arcana.common.datagen.provider;
 
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.event.ArcanaRegistries;
-import org.exodusstudio.arcana.world.States;
-import org.exodusstudio.arcana.world.Structures;
+import org.exodusstudio.arcana.common.event.ArcanaRegistries;
+import org.exodusstudio.arcana.common.world.States;
+import org.exodusstudio.arcana.common.world.Structures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.PackOutput;

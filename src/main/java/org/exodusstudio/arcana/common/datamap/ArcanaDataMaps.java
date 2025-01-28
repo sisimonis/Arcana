@@ -1,4 +1,4 @@
-package org.exodusstudio.arcana.datamap;
+package org.exodusstudio.arcana.common.datamap;
 
 import org.exodusstudio.arcana.Arcana;
 import net.minecraft.core.registries.Registries;

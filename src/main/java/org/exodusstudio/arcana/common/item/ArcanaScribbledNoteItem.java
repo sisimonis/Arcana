@@ -1,4 +1,4 @@
-package org.exodusstudio.arcana.item;
+package org.exodusstudio.arcana.common.item;
 
 import net.minecraft.world.item.Item;
 

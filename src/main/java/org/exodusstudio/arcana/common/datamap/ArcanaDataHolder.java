@@ -1,10 +1,10 @@
-package org.exodusstudio.arcana.datamap;
+package org.exodusstudio.arcana.common.datamap;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import org.exodusstudio.arcana.data.State;
-import org.exodusstudio.arcana.data.Structure;
-import org.exodusstudio.arcana.event.ArcanaRegistries;
+import org.exodusstudio.arcana.common.data.State;
+import org.exodusstudio.arcana.common.data.Structure;
+import org.exodusstudio.arcana.common.event.ArcanaRegistries;
 import net.minecraft.core.Holder;
 
 import java.util.ArrayList;

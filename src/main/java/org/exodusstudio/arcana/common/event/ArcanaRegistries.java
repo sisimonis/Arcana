@@ -1,8 +1,8 @@
-package org.exodusstudio.arcana.event;
+package org.exodusstudio.arcana.common.event;
 
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.data.State;
-import org.exodusstudio.arcana.data.Structure;
+import org.exodusstudio.arcana.common.data.State;
+import org.exodusstudio.arcana.common.data.Structure;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceKey;

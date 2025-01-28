@@ -1,12 +1,14 @@
-package org.exodusstudio.arcana.item;
+package org.exodusstudio.arcana.common.registry;
 
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.common.item.ArcanaScribbledNoteItem;
+import org.exodusstudio.arcana.common.item.ArcanaScribblingToolItem;
 
-public class ArcanaItems {
+public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Arcana.MODID);
 
     public static final DeferredItem<Item> SCRIBBLING_TOOL = ITEMS.registerItem(
