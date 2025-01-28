@@ -27,7 +27,6 @@ public class ArcanaModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ItemRegistry.NHIL_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
 
         //Blocks
-        //Bug on this one ???? WHY ?
         blockModels.createTrivialCube(BlockRegistry.RESEARCH_TABLE.get());
     }
 }
