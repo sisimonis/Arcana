@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.exodusstudio.arcana.client.Keybindings;
 import org.exodusstudio.arcana.common.item.ArcanaCreativeModeTabs;
+import org.exodusstudio.arcana.common.registry.BlockRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 
 @Mod(Arcana.MODID)
@@ -25,6 +26,7 @@ public class Arcana {
 
     public Arcana(IEventBus modEventBus, ModContainer modContainer) {
         ItemRegistry.register(modEventBus);
+        BlockRegistry.register(modEventBus);
         ArcanaCreativeModeTabs.register(modEventBus);
     }
 
