@@ -7,5 +7,5 @@ import net.minecraft.world.item.Item;
 import org.exodusstudio.arcana.Arcana;
 
 public class TagRegistry {
-    public static final TagKey<Item> FUNDAMENTAL = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "fundamental "));
+    public static final TagKey<Item> FUNDAMENTAL = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "fundamental"));
 }

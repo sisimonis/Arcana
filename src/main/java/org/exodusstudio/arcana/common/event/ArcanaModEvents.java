@@ -26,7 +26,6 @@ public class ArcanaModEvents {
             player.playSound(SoundEvents.APPLY_EFFECT_BAD_OMEN);
             Minecraft.getInstance().gameRenderer.setPostEffect(BACKGROUND);
             minecraft.setScreen(new InteriumMemoriamScreen());
-
         }
     }
 
