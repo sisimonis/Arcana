@@ -20,9 +20,14 @@ public class BlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(Arcana.MODID);
 
-    public static final DeferredBlock<Block> RESEARCH_TABLE = registerBlock("research_table",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE).setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "research_table")))));
+    public static final DeferredBlock<Block> RESEARCH_TABLE = registerBasicBlock("research_table", BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
 
+    private static DeferredBlock<Block> registerBasicBlock(String name, BlockBehaviour.Properties properties) {
+        Supplier<Block> block = () -> new Block(properties.setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Arcana.MODID, name))));
+        DeferredBlock<Block> toReturn = BLOCKS.register(name, block);
+        registerBlockItem(name, toReturn);
+        return toReturn;
+    }
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
