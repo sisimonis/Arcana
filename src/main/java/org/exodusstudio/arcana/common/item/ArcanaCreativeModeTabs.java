@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.common.registry.BlockRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 
 import java.util.function.Supplier;
@@ -23,6 +24,7 @@ public class ArcanaCreativeModeTabs {
                       pOutput.accept(ItemRegistry.SCRIBBLING_TOOL);
                       pOutput.accept(ItemRegistry.SCRIBBLED_NOTE);
                       pOutput.accept(ItemRegistry.NHIL_CRYSTAL);
+                      pOutput.accept(BlockRegistry.RESEARCH_TABLE);
                     }).build());
 
     public static void register(IEventBus eventBus)

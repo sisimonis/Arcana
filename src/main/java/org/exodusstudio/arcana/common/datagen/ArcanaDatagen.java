@@ -2,6 +2,7 @@ package org.exodusstudio.arcana.common.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -9,6 +10,8 @@ import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.datagen.provider.ArcanaEnUsGenerator;
 import org.exodusstudio.arcana.common.datagen.provider.ArcanaModelProvider;
 
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = Arcana.MODID, bus = EventBusSubscriber.Bus.MOD)
