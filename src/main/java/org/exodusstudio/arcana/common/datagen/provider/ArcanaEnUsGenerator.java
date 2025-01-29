@@ -3,6 +3,7 @@ package org.exodusstudio.arcana.common.datagen.provider;
 import org.exodusstudio.arcana.Arcana;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import org.exodusstudio.arcana.common.registry.BlockRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 
 public class ArcanaEnUsGenerator extends LanguageProvider {
@@ -31,5 +32,7 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
         addItem(ItemRegistry.SCRIBBLING_TOOL, "Scribbling Tool");
         addItem(ItemRegistry.SCRIBBLED_NOTE, "Scribbled Note");
         addItem(ItemRegistry.NHIL_CRYSTAL, "Nhil Crystal");
+        addBlock(BlockRegistry.RESEARCH_TABLE, "Research Table");
+        addItem(BlockRegistry.getItemFromBlock(BlockRegistry.RESEARCH_TABLE), "Research Table");
     }
 }
