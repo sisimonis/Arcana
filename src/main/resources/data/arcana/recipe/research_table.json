@@ -2,12 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:oak_planks"
+    "#": "#minecraft:planks",
+    "S": "arcana:scribbling_tool"
   },
   "pattern": [
+    "S  ",
     "###",
-    "###",
-    "###"
+    "# #"
   ],
   "result": {
     "count": 1,
