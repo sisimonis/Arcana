@@ -43,7 +43,7 @@ public class BlockRegistry {
             try {
                 return blockClass.getConstructor(BlockBehaviour.Properties.class).newInstance(blockProperties.setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Arcana.MODID, name))));
             } catch (Exception e) {
-                throw new RuntimeException("Erreur lors de l'instanciation du bloc : " + name, e);
+                throw new RuntimeException("Error when instanciating : " + name, e);
             }
         };
 

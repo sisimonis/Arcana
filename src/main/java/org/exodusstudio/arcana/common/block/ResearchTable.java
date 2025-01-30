@@ -25,7 +25,7 @@ public class ResearchTable extends Block {
     public static final BooleanProperty RT_ACTIVATED;
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(RT_ACTIVATED); // Ajouter la propriété pour la gestion de l'état
+        builder.add(RT_ACTIVATED);
     }
 
     public ResearchTable(Properties properties) {
