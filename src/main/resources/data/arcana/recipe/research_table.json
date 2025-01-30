@@ -2,8 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "#minecraft:planks",
-    "S": "arcana:scribbling_tool"
+    "#": "#minecraft:planks"
   },
   "pattern": [
     "   ",
