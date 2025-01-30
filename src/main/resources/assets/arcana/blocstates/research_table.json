@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "rt_activated=false": {
+      "model": "arcana:block/research_table_default"
+    },
+    "rt_activated=true": {
+      "model": "arcana:block/research_table_active"
+    }
+  }
+}

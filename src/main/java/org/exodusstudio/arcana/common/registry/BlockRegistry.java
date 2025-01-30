@@ -12,7 +12,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.common.block.ResearchTable;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -25,10 +27,31 @@ public class BlockRegistry {
     private static final Map<DeferredBlock<?>, Supplier<Item>> BLOCK_TO_ITEM = new HashMap<>();
 
 
-    public static final DeferredBlock<Block> RESEARCH_TABLE = registerBasicBlock("research_table",
+    public static final DeferredBlock<ResearchTable> RESEARCH_TABLE = registerSpecificBlock("research_table", ResearchTable.class,
             BlockBehaviour.Properties.of().strength(5.0F, 6.0F).requiresCorrectToolForDrops(),
             new Item.Properties().stacksTo(1));
 
+
+    private static <T extends Block> DeferredBlock<T> registerSpecificBlock(
+            String name,
+            Class<T> blockClass,
+            BlockBehaviour.Properties blockProperties,
+            Item.Properties itemProperties
+    )
+    {
+        Supplier<T> block = () -> {
+            try {
+                return blockClass.getConstructor(BlockBehaviour.Properties.class).newInstance(blockProperties.setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Arcana.MODID, name))));
+            } catch (Exception e) {
+                throw new RuntimeException("Erreur lors de l'instanciation du bloc : " + name, e);
+            }
+        };
+
+        DeferredBlock<T> toReturn = BLOCKS.register(name, block);
+        Supplier<Item> itemSupplier = registerBlockItem(name, toReturn, itemProperties);
+        BLOCK_TO_ITEM.put(toReturn, itemSupplier);
+        return toReturn;
+    }
 
     private static DeferredBlock<Block> registerBasicBlock(String name, BlockBehaviour.Properties blockProperties, Item.Properties itemProperties) {
         Supplier<Block> block = () -> new Block(blockProperties.setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Arcana.MODID, name))));
