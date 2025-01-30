@@ -15,7 +15,7 @@ public class DragWidget extends AbstractWidget {
     private int offsetX, offsetY;
     private boolean dragging;
     private final int screenWidth, screenHeight;
-    private static final ResourceLocation WIDGET_TEXTURE = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "textures/gui/test_widget.png<");
+    private static final ResourceLocation WIDGET_TEXTURE = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "textures/gui/test_widget.png");
 
 
     public DragWidget(int x, int y, int width, int height, int screenWidth, int screenHeight, Component message) {

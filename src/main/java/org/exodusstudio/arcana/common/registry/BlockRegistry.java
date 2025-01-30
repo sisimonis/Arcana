@@ -29,6 +29,7 @@ public class BlockRegistry {
             BlockBehaviour.Properties.of().strength(5.0F, 6.0F).requiresCorrectToolForDrops(),
             new Item.Properties().stacksTo(1));
 
+
     private static DeferredBlock<Block> registerBasicBlock(String name, BlockBehaviour.Properties blockProperties, Item.Properties itemProperties) {
         Supplier<Block> block = () -> new Block(blockProperties.setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Arcana.MODID, name))));
         DeferredBlock<Block> toReturn = BLOCKS.register(name, block);
