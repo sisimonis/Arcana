@@ -5,13 +5,17 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.registry.BlockRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
+
+import java.util.stream.Stream;
 
 public class ArcanaModelProvider extends ModelProvider {
 
@@ -28,6 +32,16 @@ public class ArcanaModelProvider extends ModelProvider {
         itemModels.generateFlatItem(BlockRegistry.RESEARCH_TABLE.asItem(), ModelTemplates.FLAT_ITEM);
 
         //Blocks
-        blockModels.createTrivialCube(BlockRegistry.RESEARCH_TABLE.get());
+        //blockModels.createTrivialCube(BlockRegistry.RESEARCH_TABLE.get());
+    }
+
+    @Override
+    protected Stream<? extends Holder<Item>> getKnownItems() {
+        return Stream.empty(); //Todo
+    }
+
+    @Override
+    protected Stream<? extends Holder<Block>> getKnownBlocks() {
+        return Stream.empty();
     }
 }
