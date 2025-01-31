@@ -15,7 +15,7 @@ public class DragWidget extends AbstractWidget {
     private int offsetX, offsetY;
     private boolean dragging;
     private final int screenWidth, screenHeight;
-    private static final ResourceLocation WIDGET_TEXTURE = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "textures/gui/test_widget.png");
+    private static final ResourceLocation WIDGET_TEXTURE = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "textures/gui/paper_widget.png");
 
 
     public DragWidget(int x, int y, int width, int height, int screenWidth, int screenHeight, Component message) {
@@ -33,14 +33,6 @@ public class DragWidget extends AbstractWidget {
                 width, height
         );
 
-        // Optional: Draw text on top
-        guiGraphics.drawCenteredString(
-                Minecraft.getInstance().font,
-                getMessage(),
-                getX() + width / 2,
-                getY() + height / 2 - 4,
-                0xFFFFFF
-        );
     }
 
     @Override
