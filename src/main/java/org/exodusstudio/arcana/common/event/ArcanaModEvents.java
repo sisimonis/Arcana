@@ -2,6 +2,7 @@ package org.exodusstudio.arcana.common.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -14,21 +15,15 @@ import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.client.Keybindings;
 import org.exodusstudio.arcana.client.gui.InteriumMemoriamScreen;
 
+import java.util.Collections;
+import java.util.List;
+
 @EventBusSubscriber(modid = Arcana.MODID)
 public class ArcanaModEvents {
 
     private static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "interior_memoriam_shader" );
 
-    @SubscribeEvent
-    public static void onAdvancement(AdvancementEvent event){
 
-        if(event.getAdvancement().id().equals(ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "advancements/test.json"))){
-            ResourceKey<Recipe<?>>
-
-            event.getEntity().awardRecipesByKey();
-        }
-
-    }
 
 
     @SubscribeEvent
