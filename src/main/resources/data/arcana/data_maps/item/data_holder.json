@@ -339,6 +339,22 @@
       "states": [
         "arcana:liquid"
       ]
+    },
+    "arcana:nhil_crystal": {
+      "states": [
+        "arcana:solid"
+      ],
+      "structures": [
+        "arcana:crystalline"
+      ]
+    },
+    "arcana:nhil_powder": {
+      "states": [
+        "arcana:solid"
+      ],
+      "structures": [
+        "arcana:pulverized"
+      ]
     }
   }
 }
