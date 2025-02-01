@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "#minecraft:planks"
+    "#": "minecraft:stone"
   },
   "pattern": [
     "###",
@@ -11,5 +11,14 @@
   "result": {
     "count": 1,
     "id": "arcana:research_table"
+  },
+  "condition": "minecraft:entity_properties",
+  "entity": "this",
+  "predicate": {
+    "player": {
+      "advancements": {
+        "arcana:arcana/root": true
+      }
+    }
   }
 }

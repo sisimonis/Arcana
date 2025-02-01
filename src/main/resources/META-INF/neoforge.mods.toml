@@ -14,8 +14,8 @@ displayURL = "https://github.com/ZestyBlaze/Arcana-Continuation"
 authors = "${mod_authors}"
 description = '''${mod_description}'''
 
-#[[mixins]]
-#config = "${mod_id}.mixins.json"
+[[mixins]]
+config = "arcana.mixins.json"
 
 [[dependencies.arcana]]
     modId = "neoforge"

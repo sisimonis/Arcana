@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "oak_plank": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:oak_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "rewards": {
+    "recipes":[ "arcana:research_table"
+    ]
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/end.png",
+    "description": {
+      "translate": "advancements.arcana.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "arcana:scribbling_tool"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.arcana.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "oak_plank"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
