@@ -1,4 +1,4 @@
-package org.exodusstudio.arcana.common.blocks.custom;
+package org.exodusstudio.arcana.common.block.custom;
 
 import net.minecraft.world.level.block.Blocks;
 

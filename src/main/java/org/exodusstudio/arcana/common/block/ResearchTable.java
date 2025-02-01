@@ -1,11 +1,9 @@
 package org.exodusstudio.arcana.common.block;
 
-import com.ibm.icu.impl.Pair;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -14,18 +12,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import javax.print.attribute.standard.JobKOctets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,6 +70,46 @@ public class ResearchTable extends HorizontalDirectionalBlock {
 
     static {
         RT_ACTIVATED = EnumProperty.create("rt_activated", RT_State.class);
+    }
+
+
+    @Override
+    public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        RT_State rtState = state.getValue(RT_ACTIVATED);
+
+        if (rtState == RT_State.ON_LEFT || rtState == RT_State.ON_RIGHT) {
+            BlockPos pairedPos = null;
+
+            // Find the second part of the research table
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                BlockPos adjacentPos = pos.relative(direction);
+                BlockState adjacentState = level.getBlockState(adjacentPos);
+
+                if (adjacentState.getBlock() instanceof ResearchTable &&
+                        (adjacentState.getValue(RT_ACTIVATED) == RT_State.ON_LEFT ||
+                                adjacentState.getValue(RT_ACTIVATED) == RT_State.ON_RIGHT)) {
+                    pairedPos = adjacentPos;
+                    break;
+                }
+            }
+
+            // If we found the other half, drop its item and remove it
+            if (pairedPos != null) {
+                level.setBlock(pairedPos, Blocks.AIR.defaultBlockState(), 3); // Remove the second block
+                Block.popResource(level, pairedPos, new ItemStack(this));
+            }
+
+            // Drop the item for the original block
+            Block.popResource(level, pos, new ItemStack(this));
+
+            // Remove the original block
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+        } else {
+            // If the block is not part of a pair, just call the super method
+            super.playerWillDestroy(level, pos, state, player);
+        }
+
+        return state;
     }
 
     private List<Object> researchTableAround(Level level, BlockPos currentPos, BlockState blockState)
