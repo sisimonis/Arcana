@@ -1,0 +1,17 @@
+{
+  "criteria": {
+    "unlock_recipe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:oak_planks"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": "arcana:research_table"
+  }
+}

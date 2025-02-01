@@ -34,11 +34,11 @@ public class InteriumMemoriamScreen extends Screen  {
         dragWidget = new DragWidget(
                 this.width / 2 - 50, // Start X position
                 this.height / 2 - 20, // Start Y position
-                73, // Widget width
-                90, // Widget height
+                146, // Widget width
+                180, // Widget height
                 this.width, // Screen width
                 this.height, // Screen height
-                Component.literal("Karma you goat")
+                Component.literal("Drag me")
         );
         addRenderableWidget(dragWidget);
     }

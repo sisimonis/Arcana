@@ -20,6 +20,8 @@ public class ItemRegistry {
             ArcanaScribbledNoteItem::new,
             new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> NHIL_CRYSTAL = ITEMS.registerSimpleItem("nhil_crystal");
+    public static final DeferredItem<Item> NHIL_POWDER = ITEMS.registerSimpleItem("nhil_powder");
+
 
     public static void register(IEventBus eventBus)
     {
