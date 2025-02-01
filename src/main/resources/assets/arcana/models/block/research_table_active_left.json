@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "arcana:block/research_table_left_front",
+    "south": "arcana:block/research_table_left_behind",
+    "east": "arcana:block/research_table_left_right",
+    "west": "arcana:block/research_table_left_left",
+    "up": "arcana:block/research_table_left_up",
+    "down": "arcana:block/research_table_left_bottom"
+  }
+}
