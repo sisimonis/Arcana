@@ -17,7 +17,9 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,19 +47,22 @@ public class ResearchTable extends HorizontalDirectionalBlock {
         if(item == ItemRegistry.SCRIBBLING_TOOL.get())
         {
             List<Object> listReturn = researchTableAround(level, pos, state);
-            if(listReturn.getFirst() != RT_State.OFF)
+            RT_State tableState = (RT_State) listReturn.getFirst();
+            if(tableState != RT_State.OFF)
             {
-                if(listReturn.get(2) != state.getValue(FACING))
+                BlockPos neighBlockPos = (BlockPos) listReturn.get(1);
+                Direction newDirection = (Direction) listReturn.get(2);
+                if(newDirection != state.getValue(FACING))
                 {
-                    state = state.setValue(FACING, (Direction)listReturn.get(2));
+                    state = state.setValue(FACING, newDirection);
                 }
 
-                RT_State otherTableState = listReturn.getFirst() == RT_State.ON_LEFT ? RT_State.ON_RIGHT : RT_State.ON_LEFT;
+                RT_State otherTableState = tableState == RT_State.ON_LEFT ? RT_State.ON_RIGHT : RT_State.ON_LEFT;
                 BlockState selectedState, neighState;
                 selectedState = (BlockState) state.setValue(RT_ACTIVATED, (RT_State)listReturn.getFirst());
                 neighState = (BlockState) state.setValue(RT_ACTIVATED, otherTableState);
                 level.setBlock(pos, selectedState, 3);
-                level.setBlock((BlockPos) listReturn.get(1), neighState, 3);
+                level.setBlock(neighBlockPos, neighState, 3);
             }
             else
             {
@@ -77,37 +82,27 @@ public class ResearchTable extends HorizontalDirectionalBlock {
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         RT_State rtState = state.getValue(RT_ACTIVATED);
 
-        if (rtState == RT_State.ON_LEFT || rtState == RT_State.ON_RIGHT) {
-            BlockPos pairedPos = null;
+        if (rtState != RT_State.OFF) {
+            Direction facing = state.getValue(FACING);
 
-            // Find the second part of the research table
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                BlockPos adjacentPos = pos.relative(direction);
-                BlockState adjacentState = level.getBlockState(adjacentPos);
+            BlockPos linkedPos = (rtState == RT_State.ON_LEFT) ? pos.relative(facing.getClockWise()) : pos.relative(facing.getCounterClockWise());
+            BlockState linkedState = level.getBlockState(linkedPos);
 
-                if (adjacentState.getBlock() instanceof ResearchTable &&
-                        (adjacentState.getValue(RT_ACTIVATED) == RT_State.ON_LEFT ||
-                                adjacentState.getValue(RT_ACTIVATED) == RT_State.ON_RIGHT)) {
-                    pairedPos = adjacentPos;
-                    break;
-                }
+            if (linkedState.getBlock() instanceof ResearchTable
+                    && linkedState.getValue(RT_ACTIVATED) != RT_State.OFF
+                    && linkedState.getValue(RT_ACTIVATED) != rtState) {
+
+                //Remove the other block
+                Arcana.LOGGER.info("Breaking the other block");
+                level.setBlock(linkedPos, Blocks.AIR.defaultBlockState(), 3);
+                Block.popResource(level, linkedPos, new ItemStack(this));
+                level.gameEvent(GameEvent.BLOCK_DESTROY, linkedPos, GameEvent.Context.of(player, linkedState));
             }
 
-            // If we found the other half, drop its item and remove it
-            if (pairedPos != null) {
-                level.setBlock(pairedPos, Blocks.AIR.defaultBlockState(), 3); // Remove the second block
-                Block.popResource(level, pairedPos, new ItemStack(this));
-            }
-
-            // Drop the item for the original block
-            Block.popResource(level, pos, new ItemStack(this));
-
-            // Remove the original block
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-        } else {
-            // If the block is not part of a pair, just call the super method
-            super.playerWillDestroy(level, pos, state, player);
         }
+
+        //Then destroy the current one
+        super.playerWillDestroy(level, pos, state, player);
 
         return state;
     }
