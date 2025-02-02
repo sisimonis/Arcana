@@ -1,0 +1,26 @@
+package org.exodusstudio.arcana.common.registry;
+
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.common.block.ResearchTable;
+import org.exodusstudio.arcana.common.block.entity.custom.ResearchTableEntity;
+
+import java.util.function.Supplier;
+
+public class BlockEntityRegistry {
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
+            DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Arcana.MODID);
+
+    public static final Supplier<BlockEntityType<ResearchTableEntity>> RESEARCH_TABLE_BE =
+            BLOCK_ENTITIES.register("research_table_be",
+                    () -> new BlockEntityType<>(ResearchTableEntity::new, BlockRegistry.RESEARCH_TABLE.get())
+            );
+
+    public static void register(IEventBus eventBus)
+    {
+        BLOCK_ENTITIES.register(eventBus);
+    }
+}

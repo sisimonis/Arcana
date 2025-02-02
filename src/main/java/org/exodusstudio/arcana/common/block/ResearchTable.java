@@ -4,22 +4,28 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
-import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.common.block.entity.custom.ResearchTableEntity;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,8 +33,9 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-public class ResearchTable extends HorizontalDirectionalBlock {
+public class ResearchTable extends BaseEntityBlock {
     public static final EnumProperty<RT_State> RT_ACTIVATED;
+    public static final EnumProperty<Direction> FACING;
     public static final MapCodec<ResearchTable> CODEC = simpleCodec(ResearchTable::new);
 
 
@@ -41,10 +48,9 @@ public class ResearchTable extends HorizontalDirectionalBlock {
     @Override
     protected @NotNull InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if(level.isClientSide) return InteractionResult.SUCCESS;
-        if(state.getValue(RT_ACTIVATED) != RT_State.OFF) return InteractionResult.FAIL;
 
         Item item = stack.getItem();
-        if(item == ItemRegistry.SCRIBBLING_TOOL.get())
+        if(item == ItemRegistry.SCRIBBLING_TOOL.get() && state.getValue(RT_ACTIVATED) == RT_State.OFF)
         {
             List<Object> listReturn = researchTableAround(level, pos, state);
             RT_State tableState = (RT_State) listReturn.getFirst();
@@ -68,6 +74,20 @@ public class ResearchTable extends HorizontalDirectionalBlock {
             {
                 player.displayClientMessage(Component.translatable("arcana.message.research_table_not_found"), true);
             }
+            return InteractionResult.SUCCESS;
+        }
+
+        if(state.getValue(RT_ACTIVATED) != RT_State.OFF && item == ItemRegistry.SCRIBBLED_NOTE.get())
+        {
+            if(level.getBlockEntity(pos) instanceof ResearchTableEntity researchTableEntity)
+            {
+                if(researchTableEntity.isEmpty() && !stack.isEmpty())
+                {
+                    researchTableEntity.setItem(0, stack);
+                    stack.shrink(1);
+                    level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
+                }
+            }
         }
 
         return InteractionResult.SUCCESS;
@@ -75,6 +95,7 @@ public class ResearchTable extends HorizontalDirectionalBlock {
 
     static {
         RT_ACTIVATED = EnumProperty.create("rt_activated", RT_State.class);
+        FACING = BlockStateProperties.HORIZONTAL_FACING;
     }
 
 
@@ -93,7 +114,6 @@ public class ResearchTable extends HorizontalDirectionalBlock {
                     && linkedState.getValue(RT_ACTIVATED) != rtState) {
 
                 //Remove the other block
-                Arcana.LOGGER.info("Breaking the other block");
                 level.setBlock(linkedPos, Blocks.AIR.defaultBlockState(), 3);
                 Block.popResource(level, linkedPos, new ItemStack(this));
                 level.gameEvent(GameEvent.BLOCK_DESTROY, linkedPos, GameEvent.Context.of(player, linkedState));
@@ -177,7 +197,31 @@ public class ResearchTable extends HorizontalDirectionalBlock {
     }
 
     @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+    protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new ResearchTableEntity(blockPos, blockState);
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if(state.getBlock() != newState.getBlock())
+        {
+            if(level.getBlockEntity(pos) instanceof ResearchTableEntity researchTableEntity)
+            {
+                Containers.dropContents(level, pos,researchTableEntity);
+                level.updateNeighbourForOutputSignal(pos, this);
+            }
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 }
