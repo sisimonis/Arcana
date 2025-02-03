@@ -13,6 +13,11 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        add("message.arcana", "Press %1$s to perform a custom action!");
+        add("key.categories.arcana", "Arcana");
+
+        add("advancements.arcana.root.description", "The Start of A adventure");
+        add("advancements.arcana.root.title", "Arcana");
 
         add("arcana.state.solid", "Solid");
         add("arcana.state.liquid", "Liquid");

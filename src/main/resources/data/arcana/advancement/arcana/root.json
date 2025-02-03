@@ -1,14 +1,21 @@
 {
   "criteria": {
-    "oak_plank": {
+    "village_note": {
       "conditions": {
-        "items": [
+        "player": [
           {
-            "items": "minecraft:oak_planks"
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "#minecraft:village"
+              }
+            }
+
           }
         ]
       },
-      "trigger": "minecraft:inventory_changed"
+      "trigger": "minecraft:location"
     }
   },
   "rewards": {
@@ -16,7 +23,7 @@
     ]
   },
   "display": {
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/end.png",
     "description": {
       "translate": "advancements.arcana.root.description"
@@ -25,14 +32,14 @@
       "count": 1,
       "id": "arcana:scribbling_tool"
     },
-    "show_toast": false,
+    "show_toast": true,
     "title": {
       "translate": "advancements.arcana.root.title"
     }
   },
   "requirements": [
     [
-      "oak_plank"
+      "village_note"
     ]
   ],
   "sends_telemetry_event": true

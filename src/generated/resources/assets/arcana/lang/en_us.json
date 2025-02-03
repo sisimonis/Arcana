@@ -1,4 +1,7 @@
 {
+  "advancements.arcana.root.description": "The Start of A adventure",
+  "advancements.arcana.root.title": "Arcana",
+  "arcana.message.research_table_not_found": "Place two research tables nearby",
   "arcana.message.scribbling_tool_no_map": "You need more paper to take notes",
   "arcana.state.gaseous": "Gaseous",
   "arcana.state.liquid": "Liquid",
@@ -17,5 +20,7 @@
   "item.arcana.scribbled_note": "Scribbled Note",
   "item.arcana.scribbling_tool": "Scribbling Tool",
   "itemGroup.arcana.arcana_creative_tab": "Arcana",
+  "key.categories.arcana": "Arcana",
+  "message.arcana": "Press %1$s to perform a custom action!",
   "tooltip.arcana.shift_to_view": "Press shift to view item structure"
 }
