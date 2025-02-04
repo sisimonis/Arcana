@@ -5,7 +5,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.common.block.ResearchTable;
 import org.exodusstudio.arcana.common.block.entity.custom.ResearchTableEntity;
 
 import java.util.function.Supplier;

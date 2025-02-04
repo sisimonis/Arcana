@@ -4,10 +4,8 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -15,7 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -41,7 +38,7 @@ public class ResearchTable extends BaseEntityBlock {
 
     public ResearchTable(Properties properties) {
         super(properties);
-        registerDefaultState((BlockState)this.defaultBlockState()
+        registerDefaultState(this.defaultBlockState()
                 .setValue(RT_ACTIVATED, RT_State.OFF));
     }
 
@@ -65,8 +62,8 @@ public class ResearchTable extends BaseEntityBlock {
 
                 RT_State otherTableState = tableState == RT_State.ON_LEFT ? RT_State.ON_RIGHT : RT_State.ON_LEFT;
                 BlockState selectedState, neighState;
-                selectedState = (BlockState) state.setValue(RT_ACTIVATED, (RT_State)listReturn.getFirst());
-                neighState = (BlockState) state.setValue(RT_ACTIVATED, otherTableState);
+                selectedState = state.setValue(RT_ACTIVATED, (RT_State)listReturn.getFirst());
+                neighState = state.setValue(RT_ACTIVATED, otherTableState);
                 level.setBlock(pos, selectedState, 3);
                 level.setBlock(neighBlockPos, neighState, 3);
             }
@@ -174,7 +171,7 @@ public class ResearchTable extends BaseEntityBlock {
                     return Arrays.asList(RT_State.ON_LEFT, currentPos.west(), Direction.SOUTH);
 
         }
-        return  Arrays.asList(RT_State.OFF);
+        return List.of(RT_State.OFF);
     }
 
     private boolean isBlockResearchTable(Level level, BlockPos pos)
