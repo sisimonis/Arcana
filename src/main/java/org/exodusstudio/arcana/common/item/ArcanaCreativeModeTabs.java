@@ -25,6 +25,9 @@ public class ArcanaCreativeModeTabs {
                       pOutput.accept(ItemRegistry.SCRIBBLED_NOTE);
                       pOutput.accept(ItemRegistry.NHIL_CRYSTAL);
                       pOutput.accept(ItemRegistry.NHIL_POWDER);
+                      pOutput.accept(ItemRegistry.OLD_NOTE);
+                      pOutput.accept(ItemRegistry.INK_BOTTLE);
+                      pOutput.accept(ItemRegistry.ANCIENT_FEATHER);
                       pOutput.accept(BlockRegistry.RESEARCH_TABLE);
                     }).build());
 
