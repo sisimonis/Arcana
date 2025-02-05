@@ -8,8 +8,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ARGB;
+import net.minecraft.world.entity.player.Player;
 import org.exodusstudio.arcana.Arcana;
 import org.jline.reader.Widget;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InteriumMemoriamScreen extends Screen  {
 
@@ -22,20 +26,38 @@ public class InteriumMemoriamScreen extends Screen  {
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        Minecraft.getInstance().gameRenderer.setPostEffect(BACKGROUND);
+
     }
 
     private static final ResourceLocation INTERIOR_MEMORIAM = ResourceLocation.fromNamespaceAndPath(Arcana.MODID,"textures/misc/memoriam_overlay.png");
 
-    private DragWidget dragWidget;
+
+    private static final List<DragWidget> customWidgets = new ArrayList<>();
     private static int lastX = -1;
     private static int lastY = -1;
+    private static boolean shouldAddWidget = false;
     @Override
     protected void init() {
         super.init();
+        for (DragWidget widget : customWidgets) {
+            addRenderableWidget(widget);
+            widget.updatePosition(widget.getCurrentX(), widget.getCurrentY());
+        }
+
+        if(shouldAddWidget){
+            addCustomWidget();
+            shouldAddWidget = false;
+        }
+    }
+
+    public static void setShouldAddWidget(boolean value) {
+        shouldAddWidget = value;
+    }
+
+    public void addCustomWidget(){
         int startX = lastX != -1 ? lastX : this.width/2-20;
-        int startY = lastY != -1 ? lastY : this.width/2-20;
-        dragWidget = new DragWidget(
+        int startY = lastY != -1 ? lastY : this.height/2-20;
+        DragWidget dragWidget = new DragWidget(
                 startX, // Start X position
                 startY, // Start Y position
                 146, // Widget width
@@ -44,12 +66,14 @@ public class InteriumMemoriamScreen extends Screen  {
                 this.height, // Screen height
                 Component.literal("Drag me")
         );
+        customWidgets.add(dragWidget);
         addRenderableWidget(dragWidget);
     }
 
 
     public InteriumMemoriamScreen() {
         super(Component.literal("InteriorMemoriam"));
+        Minecraft.getInstance().gameRenderer.setPostEffect(BACKGROUND);
     }
 
     @Override
@@ -64,11 +88,17 @@ public class InteriumMemoriamScreen extends Screen  {
     }
 
 
+
+
     @Override
     public void onClose() {
-        Minecraft.getInstance().gameRenderer.togglePostEffect();
-        lastY = dragWidget.getY();
-        lastX = dragWidget.getX();
+        Minecraft.getInstance().gameRenderer.clearPostEffect();
+        if(!customWidgets.isEmpty()){
+            DragWidget lastWidget = customWidgets.get(customWidgets.size() -1);
+            lastY = lastWidget.getY();
+            lastX = lastWidget.getX();
+        }
+
         super.onClose();
     }
 }

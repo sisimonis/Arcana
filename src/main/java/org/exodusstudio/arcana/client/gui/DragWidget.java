@@ -62,6 +62,19 @@ public class DragWidget extends AbstractWidget {
         return false;
     }
 
+    public void updatePosition(int newX, int newY) {
+        this.setX(newX);
+        this.setY(newY);
+    }
+
+    public int getCurrentX() {
+        return this.getX();
+    }
+
+    public int getCurrentY() {
+        return this.getY();
+    }
+
 
 
     @Override
