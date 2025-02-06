@@ -9,19 +9,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.exodusstudio.arcana.Arcana;
 
-//no its not  in a drag queen/king
 public class DragWidget extends AbstractWidget {
     private int offsetX, offsetY;
     private boolean dragging;
     private final int screenWidth, screenHeight;
     private static final ResourceLocation WIDGET_TEXTURE = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "textures/gui/paper_widget.png");
 
-
     public DragWidget(int x, int y, int width, int height, int screenWidth, int screenHeight, Component message) {
         super(x, y, width, height, message);
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
     }
+
+
 
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int x, int y, float partialTicks) {
@@ -60,6 +60,19 @@ public class DragWidget extends AbstractWidget {
             return true;
         }
         return false;
+    }
+
+    public void updatePosition(int newX, int newY) {
+        this.setX(newX);
+        this.setY(newY);
+    }
+
+    public int getCurrentX() {
+        return this.getX();
+    }
+
+    public int getCurrentY() {
+        return this.getY();
     }
 
 

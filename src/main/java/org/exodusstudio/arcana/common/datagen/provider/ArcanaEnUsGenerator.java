@@ -40,6 +40,9 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
         addItem(ItemRegistry.SCRIBBLED_NOTE, "Scribbled Note");
         addItem(ItemRegistry.NHIL_CRYSTAL, "Nhil Crystal");
         addItem(ItemRegistry.NHIL_POWDER, "Nhil Powder");
+        addItem(ItemRegistry.OLD_NOTE, "Old Note");
+        addItem(ItemRegistry.INK_BOTTLE, "Ink Bottle");
+        addItem(ItemRegistry.ANCIENT_FEATHER, "Ancient Feather");
         addBlock(BlockRegistry.RESEARCH_TABLE, "Research Table");
         addItem(BlockRegistry.getItemFromBlock(BlockRegistry.RESEARCH_TABLE), "Research Table");
     }
