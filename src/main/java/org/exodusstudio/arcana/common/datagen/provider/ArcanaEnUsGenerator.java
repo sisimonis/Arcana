@@ -35,6 +35,7 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
         add("itemGroup.arcana.arcana_creative_tab", "Arcana");
         add("arcana.message.scribbling_tool_no_map", "You need more paper to take notes");
         add("arcana.message.research_table_not_found", "Place two research tables nearby");
+        add("arcana.message.research_table_note_found", "You already studied this");
         addItem(ItemRegistry.SCRIBBLING_TOOL, "Scribbling Tool");
         addItem(ItemRegistry.SCRIBBLED_NOTE, "Scribbled Note");
         addItem(ItemRegistry.NHIL_CRYSTAL, "Nhil Crystal");

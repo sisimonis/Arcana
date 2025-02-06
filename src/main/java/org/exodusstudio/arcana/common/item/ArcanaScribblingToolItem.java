@@ -1,6 +1,8 @@
 package org.exodusstudio.arcana.common.item;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,7 +13,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.exodusstudio.arcana.common.component.ScribbledNoteData;
+import org.exodusstudio.arcana.common.registry.DataComponentRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
+
+import java.util.Random;
 
 public class ArcanaScribblingToolItem extends Item {
     public ArcanaScribblingToolItem(Properties properties) {
@@ -45,7 +51,11 @@ public class ArcanaScribblingToolItem extends Item {
 
             if(itemFound) {
                 playerInventory.removeItem(itemStackIndex, 1);
-                playerInventory.add(new ItemStack(ItemRegistry.SCRIBBLED_NOTE.get()));
+                ItemStack scribbledNote = new ItemStack(ItemRegistry.SCRIBBLED_NOTE.get());
+                Random random = new Random();
+                int randomID = random.nextInt(10);
+                scribbledNote.set(DataComponentRegistry.SCRIBBLED_NOTE_DATA.get(), new ScribbledNoteData("research name"));
+                playerInventory.add(scribbledNote);
             } else {
                 //No empty map on his inventory
                 player.displayClientMessage(Component.translatable("arcana.message.scribbling_tool_no_map"), true);

@@ -2,6 +2,7 @@
   "advancements.arcana.root.description": "The Start of A adventure",
   "advancements.arcana.root.title": "Arcana",
   "arcana.message.research_table_not_found": "Place two research tables nearby",
+  "arcana.message.research_table_note_found": "You already studied this",
   "arcana.message.scribbling_tool_no_map": "You need more paper to take notes",
   "arcana.state.gaseous": "Gaseous",
   "arcana.state.liquid": "Liquid",

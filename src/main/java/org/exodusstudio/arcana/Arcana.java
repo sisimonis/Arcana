@@ -12,9 +12,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.exodusstudio.arcana.client.Keybindings;
 import org.exodusstudio.arcana.common.item.ArcanaCreativeModeTabs;
-import org.exodusstudio.arcana.common.registry.BlockEntityRegistry;
-import org.exodusstudio.arcana.common.registry.BlockRegistry;
-import org.exodusstudio.arcana.common.registry.ItemRegistry;
+import org.exodusstudio.arcana.common.registry.*;
+
+import javax.xml.crypto.Data;
 
 @Mod(Arcana.MODID)
 public class Arcana {
@@ -30,6 +30,8 @@ public class Arcana {
         BlockRegistry.register(modEventBus);
         ArcanaCreativeModeTabs.register(modEventBus);
         BlockEntityRegistry.register(modEventBus);
+        DataComponentRegistry.register(modEventBus);
+        DataAttachmentRegistry.register(modEventBus);
     }
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

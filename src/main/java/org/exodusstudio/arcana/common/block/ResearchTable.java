@@ -22,7 +22,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.block.entity.custom.ResearchTableEntity;
+import org.exodusstudio.arcana.common.data_attachment.PlayerAttachmentHandler;
+import org.exodusstudio.arcana.common.item.ArcanaScribbledNoteItem;
+import org.exodusstudio.arcana.common.registry.DataComponentRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,6 +38,8 @@ public class ResearchTable extends BaseEntityBlock {
     public static final EnumProperty<RT_State> RT_ACTIVATED;
     public static final EnumProperty<Direction> FACING;
     public static final MapCodec<ResearchTable> CODEC = simpleCodec(ResearchTable::new);
+    private boolean IsCompleted = false;
+    private BlockPos masterPos = null;
 
 
     public ResearchTable(Properties properties) {
@@ -49,42 +55,12 @@ public class ResearchTable extends BaseEntityBlock {
         Item item = stack.getItem();
         if(item == ItemRegistry.SCRIBBLING_TOOL.get() && state.getValue(RT_ACTIVATED) == RT_State.OFF)
         {
-            List<Object> listReturn = researchTableAround(level, pos, state);
-            RT_State tableState = (RT_State) listReturn.getFirst();
-            if(tableState != RT_State.OFF)
-            {
-                BlockPos neighBlockPos = (BlockPos) listReturn.get(1);
-                Direction newDirection = (Direction) listReturn.get(2);
-                if(newDirection != state.getValue(FACING))
-                {
-                    state = state.setValue(FACING, newDirection);
-                }
-
-                RT_State otherTableState = tableState == RT_State.ON_LEFT ? RT_State.ON_RIGHT : RT_State.ON_LEFT;
-                BlockState selectedState, neighState;
-                selectedState = state.setValue(RT_ACTIVATED, (RT_State)listReturn.getFirst());
-                neighState = state.setValue(RT_ACTIVATED, otherTableState);
-                level.setBlock(pos, selectedState, 3);
-                level.setBlock(neighBlockPos, neighState, 3);
-            }
-            else
-            {
-                player.displayClientMessage(Component.translatable("arcana.message.research_table_not_found"), true);
-            }
-            return InteractionResult.SUCCESS;
+            useScribblingToolOn(state, level, pos, player);
         }
 
         if(state.getValue(RT_ACTIVATED) != RT_State.OFF && item == ItemRegistry.SCRIBBLED_NOTE.get())
         {
-            if(level.getBlockEntity(pos) instanceof ResearchTableEntity researchTableEntity)
-            {
-                if(researchTableEntity.isEmpty() && !stack.isEmpty())
-                {
-                    researchTableEntity.setItem(0, stack);
-                    stack.shrink(1);
-                    level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-                }
-            }
+            useScribbledNoteOn(stack, level, pos, player);
         }
 
         return InteractionResult.SUCCESS;
@@ -95,6 +71,59 @@ public class ResearchTable extends BaseEntityBlock {
         FACING = BlockStateProperties.HORIZONTAL_FACING;
     }
 
+    protected void useScribblingToolOn(BlockState state, Level level, BlockPos pos, Player player)
+    {
+        //This should return a list with the new state (OFF, ON_LEFT, ON_RIGHT), the position of the other block and its direction
+        List<Object> listReturn = researchTableAround(level, pos, state);
+        RT_State tableState = (RT_State) listReturn.getFirst();
+        if(tableState != RT_State.OFF)
+        {
+            BlockPos neighBlockPos = (BlockPos) listReturn.get(1);
+            Direction newDirection = (Direction) listReturn.get(2);
+
+            //Turn our block
+            if(newDirection != state.getValue(FACING))
+            {
+                state = state.setValue(FACING, newDirection);
+            }
+
+            //Change the RT_ACTIVATED values;
+            RT_State otherTableState = tableState == RT_State.ON_LEFT ? RT_State.ON_RIGHT : RT_State.ON_LEFT;
+            BlockState selectedState, neighState;
+            selectedState = state.setValue(RT_ACTIVATED, (RT_State)listReturn.getFirst());
+            neighState = state.setValue(RT_ACTIVATED, otherTableState);
+            level.setBlock(pos, selectedState, 3);
+            level.setBlock(neighBlockPos, neighState, 3);
+            IsCompleted = true;
+            //The block selected is always the slave one.
+            masterPos = neighBlockPos;
+        }
+        else
+        {
+            player.displayClientMessage(Component.translatable("arcana.message.research_table_not_found"), true);
+        }
+    }
+
+    protected void useScribbledNoteOn(ItemStack stack, Level level, BlockPos pos, Player player)
+    {
+        BlockPos masterRealPos = masterPos == null ? pos : masterPos;
+        if(level.getBlockEntity(masterRealPos) instanceof ResearchTableEntity researchTableEntity)
+        {
+            String researchName = stack.get(DataComponentRegistry.SCRIBBLED_NOTE_DATA).researchName();
+            if(PlayerAttachmentHandler.GetSpecificKnowledgeProgression(player, researchName) != 0)
+            {
+                player.displayClientMessage(Component.translatable("arcana.message.research_table_note_found"), true);
+                return;
+            }
+
+            PlayerAttachmentHandler.UpdateKnowledgeProgression(player, researchName, 1);
+            Arcana.LOGGER.info("I studied " + researchName);
+            level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
+            stack.shrink(1);
+            return;
+        }
+    }
+
 
     @Override
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
@@ -103,14 +132,16 @@ public class ResearchTable extends BaseEntityBlock {
         if (rtState != RT_State.OFF) {
             Direction facing = state.getValue(FACING);
 
+            //Look for the other block
             BlockPos linkedPos = (rtState == RT_State.ON_LEFT) ? pos.relative(facing.getClockWise()) : pos.relative(facing.getCounterClockWise());
             BlockState linkedState = level.getBlockState(linkedPos);
 
+            //Basic bug checks
             if (linkedState.getBlock() instanceof ResearchTable
                     && linkedState.getValue(RT_ACTIVATED) != RT_State.OFF
                     && linkedState.getValue(RT_ACTIVATED) != rtState) {
 
-                //Remove the other block
+                //Remove the other block TODO : Check if it makes bug with the notes in it (remove = destroy ??)
                 level.setBlock(linkedPos, Blocks.AIR.defaultBlockState(), 3);
                 Block.popResource(level, linkedPos, new ItemStack(this));
                 level.gameEvent(GameEvent.BLOCK_DESTROY, linkedPos, GameEvent.Context.of(player, linkedState));
@@ -128,6 +159,7 @@ public class ResearchTable extends BaseEntityBlock {
     {
         Direction facing = blockState.getValue(FACING);
         BlockPos[] blockPos;
+        //All directions, considering all the facing direction (16 cases)
         switch (facing)
         {
             case Direction.NORTH:
@@ -214,7 +246,6 @@ public class ResearchTable extends BaseEntityBlock {
         {
             if(level.getBlockEntity(pos) instanceof ResearchTableEntity researchTableEntity)
             {
-                Containers.dropContents(level, pos,researchTableEntity);
                 level.updateNeighbourForOutputSignal(pos, this);
             }
         }
