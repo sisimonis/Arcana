@@ -1,31 +1,29 @@
 package org.exodusstudio.arcana.client.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ARGB;
-import net.minecraft.world.entity.player.Player;
 import org.exodusstudio.arcana.Arcana;
-import org.jline.reader.Widget;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InteriumMemoriamScreen extends Screen  {
 
-    private void renderTextureOverlay(GuiGraphics guiGraphics, ResourceLocation shaderLocation, float alpha) {
-        int i = ARGB.white(alpha);
-        guiGraphics.blit(RenderType::guiTexturedOverlay, shaderLocation, 0, 0, 0.0F, 0.0F, guiGraphics.guiWidth(), guiGraphics.guiHeight(), guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
+    private void renderTextureOverlay(GuiGraphics guiGraphics) {
+        int i = ARGB.white((float) 1.5);
+        guiGraphics.blit(RenderType::guiTexturedOverlay, InteriumMemoriamScreen.INTERIOR_MEMORIAM, 0, 0, 0.0F, 0.0F, guiGraphics.guiWidth(), guiGraphics.guiHeight(), guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
     }
 
     private static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "interior_memoriam_shader" );
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderBackground(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }
 
@@ -60,8 +58,8 @@ public class InteriumMemoriamScreen extends Screen  {
         DragWidget dragWidget = new DragWidget(
                 startX, // Start X position
                 startY, // Start Y position
-                146, // Widget width
-                180, // Widget height
+                68, // Widget width
+                83, // Widget height
                 this.width, // Screen width
                 this.height, // Screen height
                 Component.literal("Drag me")
@@ -82,8 +80,8 @@ public class InteriumMemoriamScreen extends Screen  {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        renderTextureOverlay(graphics, INTERIOR_MEMORIAM, 1.5f);
+    public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+        renderTextureOverlay(graphics);
         super.render(graphics, mouseX, mouseY, partialTicks);
     }
 
@@ -94,7 +92,7 @@ public class InteriumMemoriamScreen extends Screen  {
     public void onClose() {
         Minecraft.getInstance().gameRenderer.clearPostEffect();
         if(!customWidgets.isEmpty()){
-            DragWidget lastWidget = customWidgets.get(customWidgets.size() -1);
+            DragWidget lastWidget = customWidgets.getLast();
             lastY = lastWidget.getY();
             lastX = lastWidget.getX();
         }

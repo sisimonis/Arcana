@@ -1,4 +1,4 @@
-package org.exodusstudio.arcana.common.block.entity.custom;
+package org.exodusstudio.arcana.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;

@@ -11,6 +11,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.common.block.NhilCrystalBlock;
 import org.exodusstudio.arcana.common.block.ResearchTable;
 
 import java.util.HashMap;
@@ -28,6 +29,14 @@ public class BlockRegistry {
     public static final DeferredBlock<ResearchTable> RESEARCH_TABLE = registerSpecificBlock("research_table", ResearchTable.class,
             BlockBehaviour.Properties.of().strength(5.0F, 6.0F).requiresCorrectToolForDrops(),
             new Item.Properties().stacksTo(1));
+
+    public static final DeferredBlock<NhilCrystalBlock> NHIL_CRYSTAL_BLOCK = registerSpecificBlock(
+            "crystal",
+            NhilCrystalBlock.class,
+            BlockBehaviour.Properties.of().strength(3.0F).requiresCorrectToolForDrops(),
+            new Item.Properties()
+    );
+
 
 
     private static <T extends Block> DeferredBlock<T> registerSpecificBlock(

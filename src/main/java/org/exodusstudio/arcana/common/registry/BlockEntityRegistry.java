@@ -5,7 +5,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.common.block.entity.custom.ResearchTableEntity;
+import org.exodusstudio.arcana.common.block.entity.NhilCrystalBlockEntity;
+import org.exodusstudio.arcana.common.block.entity.ResearchTableEntity;
 
 import java.util.function.Supplier;
 
@@ -17,6 +18,11 @@ public class BlockEntityRegistry {
             BLOCK_ENTITIES.register("research_table_be",
                     () -> new BlockEntityType<>(ResearchTableEntity::new, BlockRegistry.RESEARCH_TABLE.get())
             );
+    public static final Supplier<BlockEntityType<NhilCrystalBlockEntity>> NHILCRYSTALBLOCK_ENTITY =
+            BLOCK_ENTITIES.register("crystal",
+                    () -> new BlockEntityType<>(NhilCrystalBlockEntity::new, BlockRegistry.NHIL_CRYSTAL_BLOCK.get())
+            );
+
 
     public static void register(IEventBus eventBus)
     {

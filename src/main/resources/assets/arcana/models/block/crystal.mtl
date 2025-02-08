@@ -1,0 +1,6 @@
+# Made in Blockbench 4.12.2
+newmtl m_d4e816f2-a584-4477-bb56-2be81f833874
+map_Kd transparent_crystal.png
+newmtl m_5f4b631a-fd71-3e95-268a-7b81da74abf7
+map_Kd solid_crystal.png
+newmtl none
