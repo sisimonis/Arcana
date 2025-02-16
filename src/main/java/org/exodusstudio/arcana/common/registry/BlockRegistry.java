@@ -27,7 +27,7 @@ public class BlockRegistry {
 
 
     public static final DeferredBlock<ResearchTable> RESEARCH_TABLE = registerSpecificBlock("research_table", ResearchTable.class,
-            BlockBehaviour.Properties.of().strength(5.0F, 6.0F).requiresCorrectToolForDrops(),
+            BlockBehaviour.Properties.of().strength(5.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion(),
             new Item.Properties().stacksTo(1));
 
     public static final DeferredBlock<NhilCrystalBlock> NHIL_CRYSTAL_BLOCK = registerSpecificBlock(

@@ -26,7 +26,7 @@ public class ArcanaModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ItemRegistry.SCRIBBLING_TOOL.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.SCRIBBLED_NOTE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.NHIL_CRYSTAL.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(BlockRegistry.RESEARCH_TABLE.asItem(), ModelTemplates.FLAT_ITEM);
+        //itemModels.generateFlatItem(BlockRegistry.RESEARCH_TABLE.asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.NHIL_POWDER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.OLD_NOTE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.ANCIENT_FEATHER.get(), ModelTemplates.FLAT_ITEM);

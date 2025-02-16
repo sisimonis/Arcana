@@ -23,6 +23,8 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
         add("arcana.state.liquid", "Liquid");
         add("arcana.state.gaseous", "Gaseous");
 
+        add("arcana.block_entity.research_table", "Research Table");
+
         add("arcana.structure.amorphous", "Amorphous");
         add("arcana.structure.pulverized", "Pulverized");
         add("arcana.structure.pulverized_rough", "Pulverized (Rough)");
