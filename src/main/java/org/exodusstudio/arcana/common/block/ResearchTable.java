@@ -4,11 +4,13 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,9 +25,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.common.block.entity.custom.ResearchTableEntity;
+import org.exodusstudio.arcana.common.block.entity.ResearchTableEntity;
 import org.exodusstudio.arcana.common.data_attachment.PlayerAttachmentHandler;
-import org.exodusstudio.arcana.common.item.ArcanaScribbledNoteItem;
 import org.exodusstudio.arcana.common.registry.DataComponentRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -56,11 +57,19 @@ public class ResearchTable extends BaseEntityBlock {
         if(item == ItemRegistry.SCRIBBLING_TOOL.get() && state.getValue(RT_ACTIVATED) == RT_State.OFF)
         {
             useScribblingToolOn(state, level, pos, player);
+            return InteractionResult.SUCCESS;
         }
 
         if(state.getValue(RT_ACTIVATED) != RT_State.OFF && item == ItemRegistry.SCRIBBLED_NOTE.get())
         {
             useScribbledNoteOn(stack, level, pos, player);
+            return InteractionResult.SUCCESS;
+        }
+
+        if((level.getBlockEntity(pos) instanceof ResearchTableEntity researchTableEntity) && stack.isEmpty() && !level.isClientSide())
+        {
+            ((ServerPlayer) player).openMenu(new SimpleMenuProvider(researchTableEntity, Component.literal("Research Table")), pos);
+            return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.SUCCESS;

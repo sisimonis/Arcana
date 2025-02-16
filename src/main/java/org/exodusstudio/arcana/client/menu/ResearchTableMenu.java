@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import org.exodusstudio.arcana.common.block.entity.custom.ResearchTableEntity;
+import org.exodusstudio.arcana.common.block.entity.ResearchTableEntity;
 import org.exodusstudio.arcana.common.registry.BlockEntityRegistry;
 import org.exodusstudio.arcana.common.registry.BlockRegistry;
 import org.exodusstudio.arcana.common.registry.MenuRegistry;
