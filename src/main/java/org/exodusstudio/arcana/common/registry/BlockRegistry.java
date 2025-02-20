@@ -33,9 +33,11 @@ public class BlockRegistry {
     public static final DeferredBlock<NhilCrystalBlock> NHIL_CRYSTAL_BLOCK = registerSpecificBlock(
             "crystal",
             NhilCrystalBlock.class,
-            BlockBehaviour.Properties.of().strength(3.0F).requiresCorrectToolForDrops(),
-            new Item.Properties()
+            BlockBehaviour.Properties.of().strength(3.0F).requiresCorrectToolForDrops().noOcclusion(),
+            new Item.Properties().stacksTo(1)
     );
+
+    //public static final DeferredBlock<Block>  = ;
 
 
 

@@ -8,12 +8,9 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.registries.IdMappingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.exodusstudio.arcana.client.Keybindings;
-import org.exodusstudio.arcana.client.gui.ResearchTableScreen;
 import org.exodusstudio.arcana.common.item.ArcanaCreativeModeTabs;
 import org.exodusstudio.arcana.common.registry.*;
 
@@ -35,7 +32,6 @@ public class Arcana {
         BlockEntityRegistry.register(modEventBus);
         DataComponentRegistry.register(modEventBus);
         DataAttachmentRegistry.register(modEventBus);
-        MenuRegistry.register(modEventBus);
     }
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -44,12 +40,6 @@ public class Arcana {
         @SubscribeEvent
         public static void registerKey(RegisterKeyMappingsEvent event){
             event.register(Keybindings.INSTANCE.InteriorMemoriam);
-        }
-
-        @SubscribeEvent
-        public static void registerScreens(RegisterMenuScreensEvent event)
-        {
-            event.register(MenuRegistry.RESEARCH_TABLE_MENU.get(), ResearchTableScreen::new);
         }
     }
 }
