@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.exodusstudio.arcana.client.Keybindings;
 import org.exodusstudio.arcana.client.gui.ResearchTableScreen;
+import org.exodusstudio.arcana.common.data.theorie.TheoryRegistry;
 import org.exodusstudio.arcana.common.item.ArcanaCreativeModeTabs;
 import org.exodusstudio.arcana.common.registry.*;
 
@@ -36,6 +37,7 @@ public class Arcana {
         DataComponentRegistry.register(modEventBus);
         DataAttachmentRegistry.register(modEventBus);
         MenuRegistry.register(modEventBus);
+        TheoryRegistry.RegisterTheories();
     }
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

@@ -2,6 +2,8 @@ package org.exodusstudio.arcana.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -31,6 +33,16 @@ public class ResearchTableScreen extends AbstractContainerScreen<ResearchTableMe
     }
 
     @Override
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(graphics, mouseX, mouseY, partialTick);
+        super.render(graphics, mouseX, mouseY, partialTick);
+
+
+
+        this.renderTooltip(graphics, mouseX, mouseY);
+    }
+
+    @Override
     protected void renderBg(GuiGraphics guiGraphics, float v, int i, int i1) {
         guiGraphics.blit(
                 RenderType::guiTextured,
@@ -40,12 +52,5 @@ public class ResearchTableScreen extends AbstractContainerScreen<ResearchTableMe
                 guiGraphics.guiWidth(), guiGraphics.guiHeight(),
                 guiGraphics.guiWidth(), guiGraphics.guiHeight()
         );
-    }
-
-    @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 }
