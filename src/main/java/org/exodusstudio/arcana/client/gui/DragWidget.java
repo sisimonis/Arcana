@@ -12,26 +12,36 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.common.data.WidgetData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import static org.exodusstudio.arcana.client.gui.InteriumMemoriamScreen.savedWidgetData;
 
 
 public class DragWidget extends AbstractWidget {
     private int offsetX, offsetY;
     private boolean dragging;
-    private final int screenWidth, screenHeight;
     private static final ResourceLocation WIDGET_TEXTURE = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "textures/gui/ancient_torn_note.png");
-
-    public DragWidget(int x, int y, int width, int height, int screenWidth, int screenHeight, Component message) {
+    private final UUID uuid;
+    
+    public DragWidget(int x, int y, int width, int height, Component message, UUID uuid) {
         super(x, y, width, height, message);
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
+        this.uuid = uuid;
     }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
 
 
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int x, int y, float partialTicks) {
+
+
         guiGraphics.blit(RenderType::guiTextured,
                 WIDGET_TEXTURE,
                 getX(), getY(),
@@ -54,17 +64,27 @@ public class DragWidget extends AbstractWidget {
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        dragging = false; // Stop dragging when released
+        if (dragging && button == 0) { // Left mouse button released
+            dragging = false;
+
+            // Update saved position in savedWidgetData
+            for (WidgetData data : savedWidgetData) {
+                if (data.getUuid().equals(this.uuid)) { // Find the correct widget by ID
+                    data.setX(this.getX());
+                    data.setY(this.getY());
+                    break;
+                }
+            }
+        }
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
         if (dragging && button == 0) { // Check if left mouse button is pressed
-            int newX = Math.max(0, Math.min((int) mouseX - offsetX, screenWidth - width));
-            int newY = Math.max(0, Math.min((int) mouseY - offsetY, screenHeight - height));
+            int newX = (int) mouseX - offsetX;
+            int newY = (int) mouseY - offsetY;
             setPosition(newX, newY);
-
             return true;
         }
         return false;
@@ -82,13 +102,6 @@ public class DragWidget extends AbstractWidget {
     public int getCurrentY() {
         return this.getY();
     }
-
-    public static final Codec<DragWidget> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.INT.fieldOf("x").forGetter(DragWidget::getCurrentX),
-            Codec.INT.fieldOf("y").forGetter(DragWidget::getCurrentY),
-            Codec.INT.fieldOf("width").forGetter(DragWidget::getWidth),
-            Codec.INT.fieldOf("height").forGetter(DragWidget::getHeight)
-    ).apply(instance, (x, y, width, height) -> new DragWidget(x, y, width, height, 0, 0, Component.literal("Drag me"))));
 
 
 
