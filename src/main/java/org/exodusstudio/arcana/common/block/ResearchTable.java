@@ -119,6 +119,7 @@ public class ResearchTable extends BaseEntityBlock {
         if(level.getBlockEntity(masterRealPos) instanceof ResearchTableEntity researchTableEntity)
         {
             String researchName = stack.get(DataComponentRegistry.SCRIBBLED_NOTE_DATA).researchName();
+            Arcana.LOGGER.info("Trying to study new research : " + researchName);
             if(PlayerAttachmentHandler.GetSpecificKnowledgeProgression(player, researchName) != 0)
             {
                 player.displayClientMessage(Component.translatable("arcana.message.research_table_note_found"), true);
