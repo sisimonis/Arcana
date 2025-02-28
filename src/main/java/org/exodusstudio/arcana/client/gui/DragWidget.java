@@ -1,24 +1,17 @@
 package org.exodusstudio.arcana.client.gui;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.data.WidgetData;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import static org.exodusstudio.arcana.client.gui.InteriumMemoriamScreen.savedWidgetData;
 
 
 public class DragWidget extends AbstractWidget {
@@ -26,22 +19,20 @@ public class DragWidget extends AbstractWidget {
     private boolean dragging;
     private static final ResourceLocation WIDGET_TEXTURE = ResourceLocation.fromNamespaceAndPath(Arcana.MODID, "textures/gui/ancient_torn_note.png");
     private final UUID uuid;
-    
-    public DragWidget(int x, int y, int width, int height, Component message, UUID uuid) {
+    private final List<WidgetData> savedWidgetData;
+
+    public DragWidget(int x, int y, int width, int height, Component message, UUID uuid, List<WidgetData> savedWidgetData) {
         super(x, y, width, height, message);
         this.uuid = uuid;
+        this.savedWidgetData = savedWidgetData;
     }
 
     public UUID getUuid() {
         return uuid;
     }
 
-
-
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int x, int y, float partialTicks) {
-
-
         guiGraphics.blit(RenderType::guiTextured,
                 WIDGET_TEXTURE,
                 getX(), getY(),
@@ -70,8 +61,10 @@ public class DragWidget extends AbstractWidget {
             // Update saved position in savedWidgetData
             for (WidgetData data : savedWidgetData) {
                 if (data.getUuid().equals(this.uuid)) { // Find the correct widget by ID
-                    data.setX(this.getX());
-                    data.setY(this.getY());
+                    double relativeX = (double) this.getX() / this.width;
+                    double relativeY = (double) this.getY() / this.height;
+                    data.setRelativeX(relativeX);
+                    data.setRelativeY(relativeY);
                     break;
                 }
             }

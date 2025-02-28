@@ -44,15 +44,34 @@ public class InteriumMemoriamScreen extends Screen  {
     private static final ResourceLocation INTERIOR_MEMORIAM = ResourceLocation.fromNamespaceAndPath(Arcana.MODID,"textures/misc/memoriam_overlay.png");
 
 
-    private static final List<DragWidget> customWidgets = new ArrayList<>();
-    private static int lastX = -1;
-    private static int lastY = -1;
+    private final List<DragWidget> customWidgets = new ArrayList<>();
+    private static final int lastX = -1;
+    private static final int lastY = -1;
     private static boolean shouldAddWidget = false;
     private boolean isDataLoaded = false;
+    private final List<WidgetData> savedWidgetData = new ArrayList<>();
+    private void checkWidgetCount() {
+        if (customWidgets.size() == 5) {
+            Minecraft minecraft = Minecraft.getInstance();
+            if (minecraft.player != null) {
+                StringBuilder message = new StringBuilder("Widget UUIDs: ");
+                for (int i = 0; i < customWidgets.size(); i++) {
+                    if (i > 0) {
+                        message.append(", ");
+                    }
+                    message.append(customWidgets.get(i).getUuid());
+                }
+                minecraft.player.displayClientMessage(
+                        Component.literal(message.toString()),
+                        false
+                );
+            }
+        }
+    }
     @Override
     protected void init() {
         super.init();
-
+        customWidgets.clear();
         this.clearWidgets();
 
         if (!customWidgets.isEmpty()) {
@@ -66,19 +85,24 @@ public class InteriumMemoriamScreen extends Screen  {
         isDataLoaded = true;
 
         for (WidgetData data : savedWidgetData) {
+            // Convert relative coordinates to absolute coordinates
+            int absoluteX = (int) (data.getRelativeX() * this.width);
+            int absoluteY = (int) (data.getRelativeY() * this.height);
+
             DragWidget dragWidget = new DragWidget(
-                    data.getX(),
-                    data.getY(),
-                    68, // Widget width
-                    83, // Widget height
+                    absoluteX, absoluteY,
+                    68, 83,
                     Component.literal("Drag me"),
-                    data.getUuid()
+                    data.getUuid(),
+                    this.savedWidgetData
             );
+
+            checkWidgetCount();
             customWidgets.add(dragWidget);
             addRenderableWidget(dragWidget);
         }
 
-        if(shouldAddWidget){
+        if (shouldAddWidget) {
             addCustomWidget();
             shouldAddWidget = false;
         }
@@ -111,8 +135,8 @@ public class InteriumMemoriamScreen extends Screen  {
     }
 
     public void addCustomWidget() {
-        int startX = lastX != -1 ? lastX : this.width / 2 - 20;
-        int startY = lastY != -1 ? lastY : this.height / 2 - 20;
+        int startX = this.width / 2 - 20;
+        int startY = this.height / 2 - 20;
         UUID uuid = UUID.randomUUID(); // Generate a new UUID
         DragWidget dragWidget = new DragWidget(
                 startX, // Start X position
@@ -120,10 +144,13 @@ public class InteriumMemoriamScreen extends Screen  {
                 68, // Widget width
                 83, // Widget height
                 Component.literal("Drag me"),
-                uuid
+                uuid,
+                this.savedWidgetData
         );
         customWidgets.add(dragWidget);
         addRenderableWidget(dragWidget);
+        savedWidgetData.add(new WidgetData(startX, startY,uuid));
+        checkWidgetCount();
     }
 
 
@@ -144,28 +171,21 @@ public class InteriumMemoriamScreen extends Screen  {
         super.render(graphics, mouseX, mouseY, partialTicks);
     }
 
-    public static final List<WidgetData> savedWidgetData = new ArrayList<>();
 
-    
 
     @Override
     public void onClose() {
         Minecraft.getInstance().gameRenderer.clearPostEffect();
-        savedWidgetData.clear();
-        for (DragWidget widget : customWidgets){
-            savedWidgetData.add(new WidgetData(widget.getX(), widget.getY(), widget.getUuid()));
-        }
         saveWidgetData();
         super.onClose();
     }
 
     private void saveWidgetData() {
         MinecraftServer server = Minecraft.getInstance().getSingleplayerServer();
-        if (server == null) return; // Ensure we're in a singleplayer world
+        if (server == null) return;
 
         Path worldPath = server.getWorldPath(LevelResource.ROOT).resolve("data");
 
-        // Ensure the "data" folder exists
         try {
             Files.createDirectories(worldPath);
         } catch (IOException e) {
@@ -173,8 +193,16 @@ public class InteriumMemoriamScreen extends Screen  {
             return;
         }
 
-        // Use Codec to serialize the data
-        DataResult<JsonElement> result = WidgetData.CODEC.listOf().encodeStart(JsonOps.INSTANCE, savedWidgetData);
+        // Convert absolute coordinates to relative coordinates before saving
+        List<WidgetData> relativeData = new ArrayList<>();
+        for (DragWidget widget : customWidgets) {
+            double relativeX = (double) widget.getX() / this.width;
+            double relativeY = (double) widget.getY() / this.height;
+            relativeData.add(new WidgetData(relativeX, relativeY, widget.getUuid()));
+        }
+
+        // Save the relative data
+        DataResult<JsonElement> result = WidgetData.CODEC.listOf().encodeStart(JsonOps.INSTANCE, relativeData);
         result.result().ifPresent(json -> {
             Path path = worldPath.resolve("widget_data.json");
             try {

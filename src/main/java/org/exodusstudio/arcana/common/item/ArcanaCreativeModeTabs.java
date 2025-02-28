@@ -29,7 +29,6 @@ public class ArcanaCreativeModeTabs {
                       pOutput.accept(ItemRegistry.INK_BOTTLE);
                       pOutput.accept(ItemRegistry.ANCIENT_FEATHER);
                       pOutput.accept(BlockRegistry.RESEARCH_TABLE);
-                      pOutput.accept(BlockRegistry.NHIL_CRYSTAL_BLOCK);
                     }).build());
 
     public static void register(IEventBus eventBus)
