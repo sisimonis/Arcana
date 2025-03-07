@@ -7,6 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import org.apache.logging.log4j.LogManager;
@@ -17,16 +18,14 @@ import org.exodusstudio.arcana.common.data.theorie.TheoryRegistry;
 import org.exodusstudio.arcana.common.item.ArcanaCreativeModeTabs;
 import org.exodusstudio.arcana.common.registry.*;
 
-import javax.xml.crypto.Data;
-
 @Mod(Arcana.MODID)
 public class Arcana {
     public static final String MODID = "arcana";
     public static final Logger LOGGER = LogManager.getLogger();
-
     public static ResourceLocation id(String value) {
         return ResourceLocation.fromNamespaceAndPath(MODID, value);
     }
+
 
     public Arcana(IEventBus modEventBus, ModContainer modContainer) {
         ItemRegistry.register(modEventBus);

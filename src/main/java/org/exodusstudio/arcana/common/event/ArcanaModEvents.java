@@ -11,6 +11,8 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -24,8 +26,6 @@ import org.exodusstudio.arcana.common.registry.ItemRegistry;
 
 @EventBusSubscriber(modid = Arcana.MODID)
 public class ArcanaModEvents {
-
-
 
 
     @SubscribeEvent
@@ -57,13 +57,15 @@ public class ArcanaModEvents {
 
     }
 
+    //Client side:
 
 
-
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer player = minecraft.player;
+        InteriumMemoriamScreen.updateWidgetFading();
         if (player != null && Keybindings.INSTANCE.InteriorMemoriam.consumeClick()) {
             player.playSound(SoundEvents.APPLY_EFFECT_BAD_OMEN);
             minecraft.setScreen(new InteriumMemoriamScreen());
