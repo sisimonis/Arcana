@@ -1,6 +1,7 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "arcana:item/research_table"
+    "model": "arcana:item/research_table",
+    "render_type": "minecraft:translucent"
   }
 }

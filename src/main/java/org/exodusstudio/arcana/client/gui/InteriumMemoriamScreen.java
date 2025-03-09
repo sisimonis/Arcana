@@ -39,7 +39,9 @@ public class InteriumMemoriamScreen extends Screen  {
 
     @Override
     public void renderBackground(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-
+        if (!activePopups.isEmpty()) {
+            super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+        }
     }
 
     private static final ResourceLocation INTERIOR_MEMORIAM = ResourceLocation.fromNamespaceAndPath(Arcana.MODID,"textures/misc/memoriam_overlay.png");
@@ -233,6 +235,16 @@ public class InteriumMemoriamScreen extends Screen  {
             } else {
                 saveWidgetData();
             }
+        }
+
+        boolean hasActivePopups = !activePopups.isEmpty();
+        for (DragWidget widget : customWidgets) {
+            widget.active = !hasActivePopups;
+            // Sync alpha (existing code)
+            savedWidgetData.stream()
+                    .filter(data -> data.getUuid().equals(widget.getUuid()))
+                    .findFirst()
+                    .ifPresent(data -> widget.setAlpha(data.getAlpha()));
         }
 
         for (DragWidget widget : customWidgets) {

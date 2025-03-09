@@ -12,16 +12,12 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.exodusstudio.arcana.Arcana;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-
 @OnlyIn(Dist.CLIENT)
 public class PopupWidget extends AbstractWidget {
 
     private ResourceLocation texture;
     private static boolean Corrupt = false;
     private final Runnable onClose;
-    private int normalColor = 0xFFFFFF;
-    private int hoveringColor = 0x000000;
     private final int textureIndex;
 
     public PopupWidget(int x, int y, int width, int height, Component message, int textureIndex, Runnable onClose) {
@@ -50,7 +46,7 @@ public class PopupWidget extends AbstractWidget {
     }
 
     public void setCorrupt(boolean corrupt) {
-        this.Corrupt = corrupt;
+        Corrupt = corrupt;
         updateTexture();
     }
 
@@ -69,6 +65,8 @@ public class PopupWidget extends AbstractWidget {
         boolean isHoveringX = x >= closeX && y <= closeX + closeSize
                 && x >= closeY && y <= closeY + closeSize;
 
+        int normalColor = 0xFFFFFF;
+        int hoveringColor = 0x000000;
         int wgColor = isHoveringX ? hoveringColor : normalColor;
         String Wtext = (!Corrupt) ? "X" :"̇/";
 

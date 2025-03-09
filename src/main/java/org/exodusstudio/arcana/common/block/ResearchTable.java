@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,6 +25,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.block.entity.ResearchTableEntity;
 import org.exodusstudio.arcana.common.data_attachment.PlayerAttachmentHandler;
@@ -41,7 +44,12 @@ public class ResearchTable extends BaseEntityBlock {
     public static final MapCodec<ResearchTable> CODEC = simpleCodec(ResearchTable::new);
     private boolean IsCompleted = false;
     private BlockPos masterPos = null;
+    private static final VoxelShape TableShape = Block.box(0, 0,0, 16, 14, 16);
 
+    @Override
+    protected @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return TableShape;
+    }
 
     public ResearchTable(Properties properties) {
         super(properties);
