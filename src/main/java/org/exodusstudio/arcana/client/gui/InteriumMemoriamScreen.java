@@ -61,6 +61,7 @@ public class InteriumMemoriamScreen extends Screen  {
         super.init();
         customWidgets.clear();
         savedWidgetData.clear();
+        activePopups.clear();
         orderedWidgets.clear();
         this.clearWidgets();
 
@@ -156,7 +157,10 @@ public class InteriumMemoriamScreen extends Screen  {
         int x = (this.width - popupWidth) / 2;
         int y = (this.height - popupHeight) / 2;
         PopupWidget[] popupHolder = new PopupWidget[1];
-        popupHolder[0] = new PopupWidget(x, y, popupWidth, popupHeight, Component.empty(), textureIndex, () -> {
+        popupHolder[0] = new PopupWidget(
+                x, y, popupWidth, popupHeight,
+                Component.translatable("gui.widget." + textureIndex),
+                textureIndex, () -> {
             removeWidget(popupHolder[0]);
             activePopups.remove(popupHolder[0]); // Remove from tracking when closed
         });

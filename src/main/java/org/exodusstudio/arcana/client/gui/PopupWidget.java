@@ -7,10 +7,13 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.exodusstudio.arcana.Arcana;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class PopupWidget extends AbstractWidget {
@@ -33,10 +36,14 @@ public class PopupWidget extends AbstractWidget {
 
     private void updateTexture() {
         if (!Corrupt) {
-            this.texture = ResourceLocation.fromNamespaceAndPath(
-                    Arcana.MODID,
-                    "textures/gui/interior_memoriam/widget_" + textureIndex + ".png"
-            );
+            if(texture == null){
+                this.texture = ResourceLocation.fromNamespaceAndPath(Arcana.MODID,"textures/gui/interior_memoriam/widget_default.png");
+            } else {
+                this.texture = ResourceLocation.fromNamespaceAndPath(
+                        Arcana.MODID,
+                        "textures/gui/interior_memoriam/widget_" + textureIndex + ".png"
+                );
+            }
         } else {
             this.texture = ResourceLocation.fromNamespaceAndPath(
                     Arcana.MODID,
@@ -55,6 +62,35 @@ public class PopupWidget extends AbstractWidget {
         if (texture != null) {
             guiGraphics.blit(RenderType::guiTextured,texture, getX(), getY(), 0, 0, width, height, width, height);
         }
+
+        Minecraft minecraft = Minecraft.getInstance();
+        int textWidth = width - 19; // 10px padding on both sides
+        int textY = getY() + 25;
+        int maxLines = (height - 25) / minecraft.font.lineHeight; // Calculate max visible lines
+
+        // Split text into wrapped lines
+        List<FormattedCharSequence> lines = minecraft.font.split(getMessage(), textWidth);
+
+        float scale = 1.0f;
+        if (lines.size() > maxLines) {
+            scale = (float) maxLines / lines.size(); // Shrink proportionally
+            scale = Math.max(scale, 0.5f); // Set a minimum readable scale
+        }
+
+        for (int i = 0; i < lines.size(); i++) {
+            if (i >= maxLines) break; // Ensure we don't draw extra lines
+
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().scale(scale, scale, 1.0f);
+
+            float scaledX = (getX() + 10) / scale;
+            float scaledY = (textY + (i * minecraft.font.lineHeight)) / scale;
+
+            guiGraphics.drawString(minecraft.font, lines.get(i), (int) scaledX, (int) scaledY, 0x000000, false);
+
+            guiGraphics.pose().popPose();
+        }
+
 
         // Define X hitbox
         int closeX = getX() + width - 15;
@@ -104,6 +140,10 @@ public class PopupWidget extends AbstractWidget {
             return true;
         }
         return false;
+    }
+
+    private void close(){
+        this.onClose.run();
     }
 
     @Override

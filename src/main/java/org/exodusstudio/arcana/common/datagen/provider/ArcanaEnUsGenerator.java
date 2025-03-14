@@ -13,17 +13,24 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add("message.arcana", "Press %1$s to perform a custom action!");
+        add("message.arcana", "You found a old note in the floor, use it and press %1$s to see the information on it");
         add("key.categories.arcana", "Arcana");
 
-        add("advancements.arcana.root.description", "The Start of A adventure");
+        add("advancements.arcana.root.description", "The Path of the Arcane Alchemist");
+        add("advancements.arcana.ink.description", "what this is used for? ink ofc");
         add("advancements.arcana.root.title", "Arcana");
+        add("advancements.arcana.ink.title", "A Ink bottle?");
 
         add("arcana.state.solid", "Solid");
         add("arcana.state.liquid", "Liquid");
         add("arcana.state.gaseous", "Gaseous");
 
         add("arcana.block_entity.research_table", "Research Table");
+
+        //Max Length: 352 char
+        //add("gui.widget.1", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXZZZZYYYYAAAAAA");
+        add("gui.widget.1", "Ages ago the best arcane alchemist roamed the land, he left clues of his inventions in different places, but fearing for the worst he locked them behind with magic, now you, descendant of the first alchemist need to search for the power your ancestor left, try searching for a village that alchemist left one of his prototypes in there");
+
 
         add("arcana.structure.amorphous", "Amorphous");
         add("arcana.structure.pulverized", "Pulverized");
