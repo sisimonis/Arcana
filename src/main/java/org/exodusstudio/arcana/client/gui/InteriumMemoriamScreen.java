@@ -17,7 +17,7 @@ import net.minecraft.world.level.storage.LevelResource;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.common.data.WidgetData;
+import org.exodusstudio.arcana.common.component.WidgetData;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

@@ -7,7 +7,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import org.apache.logging.log4j.LogManager;
@@ -28,8 +27,8 @@ public class Arcana {
 
 
     public Arcana(IEventBus modEventBus, ModContainer modContainer) {
-        ItemRegistry.register(modEventBus);
         BlockRegistry.register(modEventBus);
+        ItemRegistry.register(modEventBus);
         ArcanaCreativeModeTabs.register(modEventBus);
         BlockEntityRegistry.register(modEventBus);
         DataComponentRegistry.register(modEventBus);

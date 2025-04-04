@@ -51,6 +51,12 @@ public class ResearchTable extends BaseEntityBlock {
         return TableShape;
     }
 
+    public ResearchTable() {
+        this(Properties.ofFullCopy(Blocks.BAMBOO_BLOCK)
+                .strength(2.0f)
+                .sound(SoundType.WOOD));
+    }
+
     public ResearchTable(Properties properties) {
         super(properties);
         registerDefaultState(this.defaultBlockState()

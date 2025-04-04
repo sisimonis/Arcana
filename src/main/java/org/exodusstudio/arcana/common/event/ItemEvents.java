@@ -26,6 +26,8 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 @EventBusSubscriber(modid = Arcana.MODID)
 public class ItemEvents {
+
+
     @SubscribeEvent
     public static void tooltipEvent(ItemTooltipEvent event) {
         ArcanaDataHolder data = event.getItemStack().getItem().builtInRegistryHolder().getData(ArcanaDataMaps.DATA_HOLDER);

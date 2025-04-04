@@ -1,6 +1,5 @@
 package org.exodusstudio.arcana.common.registry;
 
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +11,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
+import org.exodusstudio.arcana.common.block.NitorBlock;
 import org.exodusstudio.arcana.common.block.ResearchTable;
 
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public class BlockRegistry {
             BlockBehaviour.Properties.of().strength(5.0F, 6.0F).requiresCorrectToolForDrops().noOcclusion(),
             new Item.Properties().stacksTo(1));
 
-
+    
 
     //public static final DeferredBlock<Block>  = ;
 
