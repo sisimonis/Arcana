@@ -28,6 +28,7 @@ public class ArcanaScribblingToolItem extends Item {
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
         BlockState blockState = world.getBlockState(pos);
+        //Also needs to be able to collect Item data -Pyr0
 
         if(!world.isClientSide)
         {
@@ -46,7 +47,7 @@ public class ArcanaScribblingToolItem extends Item {
                     break;
                 }
             }
-
+            //Should also check if the block has already been taken notes of -Pyr0
             if(itemFound) {
                 playerInventory.removeItem(itemStackIndex, 1);
                 ItemStack scribbledNote = new ItemStack(ItemRegistry.SCRIBBLED_NOTE.get());

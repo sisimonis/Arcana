@@ -10,6 +10,7 @@ public class Theory {
     private final String research_name;
     private final Supplier<Block> relatedBlock;
     private final Supplier<Item> relatedItem;
+    //either of the suppliers could be set to null in order to use 1 function for both Items and Blocks
 
     public Theory(int id, String research_name, Supplier<Block> relatedBlock, Supplier<Item> relatedItem)
     {
