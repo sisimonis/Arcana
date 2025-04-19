@@ -7,6 +7,6 @@ import java.util.function.Supplier;
 
 public class StoneTheory extends Theory{
     public StoneTheory() {
-        super(2, "Stone Theory", () -> Blocks.STONE);
+        super(2, "Stone Theory", () -> Blocks.STONE, null);
     }
 }

@@ -24,6 +24,7 @@ public class TheoryRegistry {
     {
         registerTheory(new DirtTheory());
         registerTheory(new StoneTheory());
+        registerTheory(new NhilTheory());
     }
 
     public static int TheoryAmount()

@@ -1,13 +1,9 @@
 package org.exodusstudio.arcana.common.item;
 
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.DyedItemColor;
-import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
@@ -32,8 +28,9 @@ public class ArcanaCreativeModeTabs {
                       pOutput.accept(ItemRegistry.OLD_NOTE);
                       pOutput.accept(ItemRegistry.INK_BOTTLE);
                       pOutput.accept(ItemRegistry.ANCIENT_FEATHER);
-                      pOutput.accept(ItemRegistry.NITOR);
                       pOutput.accept(BlockRegistry.RESEARCH_TABLE);
+                      pOutput.accept(ItemRegistry.NITOR);
+
                     }).build());
 
     public static void register(IEventBus eventBus)

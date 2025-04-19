@@ -9,12 +9,16 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.exodusstudio.arcana.client.Keybindings;
 import org.exodusstudio.arcana.client.gui.ResearchTableScreen;
 import org.exodusstudio.arcana.common.data.theorie.TheoryRegistry;
 import org.exodusstudio.arcana.common.item.ArcanaCreativeModeTabs;
+import org.exodusstudio.arcana.common.particle.BoilingParticle;
+import org.exodusstudio.arcana.common.particle.EvaporationParticle;
+import org.exodusstudio.arcana.common.particle.ParticleRegistry;
 import org.exodusstudio.arcana.common.registry.*;
 
 @Mod(Arcana.MODID)
@@ -35,6 +39,7 @@ public class Arcana {
         DataAttachmentRegistry.register(modEventBus);
         MenuRegistry.register(modEventBus);
         TheoryRegistry.RegisterTheories();
+        ParticleRegistry.register(modEventBus);
     }
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -49,6 +54,12 @@ public class Arcana {
         public static void registerScreens(RegisterMenuScreensEvent event)
         {
             event.register(MenuRegistry.RESEARCH_TABLE_MENU.get(), ResearchTableScreen::new);
+        }
+
+        @SubscribeEvent
+        public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(ParticleRegistry.EVAPORTAION_PARTICLE.get(), EvaporationParticle.Provider:: new);
+            event.registerSpriteSet(ParticleRegistry.BOILING_PARTICLE.get(), BoilingParticle.Provider::new);
         }
     }
 }

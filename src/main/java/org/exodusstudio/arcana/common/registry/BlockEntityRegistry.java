@@ -19,6 +19,7 @@ public class BlockEntityRegistry {
             );
 
 
+
     public static void register(IEventBus eventBus)
     {
         BLOCK_ENTITIES.register(eventBus);

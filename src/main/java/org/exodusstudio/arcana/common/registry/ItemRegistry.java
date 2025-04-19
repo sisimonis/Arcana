@@ -1,5 +1,6 @@
 package org.exodusstudio.arcana.common.registry;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -8,6 +9,8 @@ import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.item.ArcanaOldNoteItem;
 import org.exodusstudio.arcana.common.item.ArcanaScribbledNoteItem;
 import org.exodusstudio.arcana.common.item.ArcanaScribblingToolItem;
+
+import java.awt.*;
 
 public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Arcana.MODID);
@@ -30,11 +33,8 @@ public class ItemRegistry {
     public static final DeferredItem<Item> NITOR = ITEMS.registerSimpleItem("nitor");
 
 
-
     public static void register(IEventBus eventBus)
     {
         ITEMS.register(eventBus);
     }
-
-
 }

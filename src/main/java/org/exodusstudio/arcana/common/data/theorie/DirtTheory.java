@@ -7,6 +7,6 @@ import java.util.function.Supplier;
 
 public class DirtTheory extends Theory{
     public DirtTheory() {
-        super(1, "Dirt Theory", () -> Blocks.DIRT);
+        super(1, "Dirt Theory", () -> Blocks.DIRT, null);
     }
 }

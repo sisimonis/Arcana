@@ -3,20 +3,15 @@ package org.exodusstudio.arcana.common.datagen.provider;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.registry.BlockRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public class ArcanaModelProvider extends ModelProvider {
@@ -36,7 +31,6 @@ public class ArcanaModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ItemRegistry.OLD_NOTE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.ANCIENT_FEATHER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ItemRegistry.INK_BOTTLE.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ItemRegistry.NITOR.get(), ModelTemplates.FLAT_ITEM);
 
         //Blocks
         //blockModels.createTrivialCube(BlockRegistry.RESEARCH_TABLE.get());

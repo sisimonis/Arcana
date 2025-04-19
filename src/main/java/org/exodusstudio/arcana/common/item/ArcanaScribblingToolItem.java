@@ -11,15 +11,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import org.exodusstudio.arcana.Arcana;
 import org.exodusstudio.arcana.common.component.ScribbledNoteData;
-import org.exodusstudio.arcana.common.data.theorie.Theory;
-import org.exodusstudio.arcana.common.data.theorie.TheoryRegistry;
 import org.exodusstudio.arcana.common.registry.DataComponentRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class ArcanaScribblingToolItem extends Item {
@@ -53,27 +48,12 @@ public class ArcanaScribblingToolItem extends Item {
             }
 
             if(itemFound) {
-                //Find the theory that correspond the block clicked
-                LinkedHashMap<Integer, Theory> theories = TheoryRegistry.getAllTheories();
-                Theory matchingTheory = null;
-                for(Map.Entry<Integer, Theory> entry : theories.entrySet())
-                {
-                    Theory theory = entry.getValue();
-                    if(theory.getRelatedBlock() == blockState.getBlock())
-                    {
-                        matchingTheory = theory;
-                        break;
-                    }
-                }
-
-                if(matchingTheory != null)
-                {
-                    playerInventory.removeItem(itemStackIndex, 1);
-                    ItemStack scribbledNote = new ItemStack(ItemRegistry.SCRIBBLED_NOTE.get());
-                    scribbledNote.set(DataComponentRegistry.SCRIBBLED_NOTE_DATA.get(), new ScribbledNoteData(matchingTheory.getResearchName()));
-                    playerInventory.add(scribbledNote);
-                    Arcana.LOGGER.info("New research : " + matchingTheory.getResearchName());
-                }
+                playerInventory.removeItem(itemStackIndex, 1);
+                ItemStack scribbledNote = new ItemStack(ItemRegistry.SCRIBBLED_NOTE.get());
+                Random random = new Random();
+                int randomID = random.nextInt(10);
+                scribbledNote.set(DataComponentRegistry.SCRIBBLED_NOTE_DATA.get(), new ScribbledNoteData("research name"));
+                playerInventory.add(scribbledNote);
             } else {
                 //No empty map on his inventory
                 player.displayClientMessage(Component.translatable("arcana.message.scribbling_tool_no_map"), true);
