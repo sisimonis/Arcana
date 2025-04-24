@@ -53,7 +53,8 @@ public class BoilingParticle extends TextureSheetParticle {
         this.setSpriteFromAge(spriteSet);
         super.tick();
        while (this.level.getFluidState(BlockPos.containing(this.x, this.y , this.z)).is(FluidTags.WATER) && this.age > 28 && this.age < 30 &&
-               this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER)) {
+               this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER))
+       {
            this.age = this.age - 1;
            i = i + 1;
            if (i > 100) {
@@ -62,10 +63,15 @@ public class BoilingParticle extends TextureSheetParticle {
        }
 
         if (!this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER) &&
-                this.level.getFluidState(BlockPos.containing(this.x, this.y - 0.2, this.z)).is(FluidTags.WATER)) {
-
+                this.level.getFluidState(BlockPos.containing(this.x, this.y - 0.2, this.z)).is(FluidTags.WATER))
+        {
             this.gravity = -0.001f;
             yd = 0f;
+        }
+
+        if (!this.removed && !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER))
+        {
+            this.remove();
         }
     }
 }
