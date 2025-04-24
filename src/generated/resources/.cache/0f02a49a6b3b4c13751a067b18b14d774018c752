@@ -1,4 +1,5 @@
-// 1.21.4	2025-04-06T00:24:26.7043883	Model Definitions - arcana
+// 1.21.4	2025-04-24T13:05:14.4484106	Model Definitions - arcana
+9fe54141fbed5765923886016e4b441b1881f1e6 assets/arcana/blockstates/nimbus_stone.json
 b6cdffe3ef9fc7858fb55f0813c31879010598be assets/arcana/items/ancient_feather.json
 6cbc940f708ab72146ef2629f82804b9ed037a6b assets/arcana/items/ink_bottle.json
 80a32ab0d21a1c2247c0e16ee34a509e039262e0 assets/arcana/items/nhil_crystal.json
@@ -6,6 +7,7 @@ b6cdffe3ef9fc7858fb55f0813c31879010598be assets/arcana/items/ancient_feather.jso
 b7e8f50831ed4b49c0792dcb68b3b24525883dac assets/arcana/items/old_note.json
 e8a1b337f480e82cc5e8e1084f5e5bdce9870568 assets/arcana/items/scribbled_note.json
 fa43621a4bbc63a62c62874616a7997418bb8bc4 assets/arcana/items/scribbling_tool.json
+e1c6364cf25e6c7218f84a5d1c2933f3b8d9ff90 assets/arcana/models/block/nimbus_stone.json
 a44f1bb0db22b8af00dee39e44928b795aac75eb assets/arcana/models/item/ancient_feather.json
 63622ead3a9e5c12926d95021a695a421649d402 assets/arcana/models/item/ink_bottle.json
 71e384bca593d1244c818fe4d63aa16a53652421 assets/arcana/models/item/nhil_crystal.json

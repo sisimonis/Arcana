@@ -30,6 +30,7 @@ public class ArcanaCreativeModeTabs {
                       pOutput.accept(ItemRegistry.ANCIENT_FEATHER);
                       pOutput.accept(BlockRegistry.RESEARCH_TABLE);
                       pOutput.accept(ItemRegistry.NITOR);
+                      pOutput.accept(BlockRegistry.NIMBUS_STONE);
 
                     }).build());
 

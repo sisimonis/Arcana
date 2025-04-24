@@ -21,7 +21,7 @@ public class BoilingParticle extends TextureSheetParticle {
         this.quadSize = 0.12f;
         this.setSize(0.02f, 0.02f);
         this.setSpriteFromAge(spriteSet);
-        this.rCol = 100;
+        this.rCol = 0;
         this.gCol = 0;
         this.bCol = 0;
         yd = ySpeed;

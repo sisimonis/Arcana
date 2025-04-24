@@ -12,6 +12,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
 
+import org.exodusstudio.arcana.common.block.NimbusStone;
 import org.exodusstudio.arcana.common.block.ResearchTable;
 
 import java.util.HashMap;
@@ -32,7 +33,9 @@ public class BlockRegistry {
 
 
 
-    //public static final DeferredBlock<Block>  = ;
+    public static final DeferredBlock<NimbusStone> NIMBUS_STONE = registerSpecificBlock("nimbus_stone", NimbusStone.class,
+            BlockBehaviour.Properties.of().strength(2.0f, 1.0f).requiresCorrectToolForDrops().noOcclusion(),
+            new Item.Properties().stacksTo(64));
 
 
 
