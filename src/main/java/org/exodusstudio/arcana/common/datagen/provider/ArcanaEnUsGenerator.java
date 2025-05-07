@@ -54,6 +54,6 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
         addItem(ItemRegistry.ANCIENT_FEATHER, "Ancient Feather");
         addBlock(BlockRegistry.RESEARCH_TABLE, "Research Table");
         addItem(BlockRegistry.getItemFromBlock(BlockRegistry.RESEARCH_TABLE), "Research Table");
-        addItem(BlockRegistry.getItemFromBlock(BlockRegistry.NIMBUS_STONE),"Nimbus Stone");
+        //addItem(BlockRegistry.getItemFromBlock(BlockRegistry.NIMBUS_STONE),"Nimbus Stone");
     }
 }

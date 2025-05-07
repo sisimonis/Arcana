@@ -34,7 +34,7 @@ public class ArcanaModelProvider extends ModelProvider {
 
         //Blocks
         //blockModels.createTrivialCube(BlockRegistry.RESEARCH_TABLE.get());
-        blockModels.createTrivialCube(BlockRegistry.NIMBUS_STONE.get());
+        //blockModels.createTrivialCube(BlockRegistry.NIMBUS_STONE.get());
     }
 
     @Override

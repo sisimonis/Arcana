@@ -1,9 +1,12 @@
 package org.exodusstudio.arcana.common.item;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
@@ -29,8 +32,12 @@ public class ArcanaCreativeModeTabs {
                       pOutput.accept(ItemRegistry.INK_BOTTLE);
                       pOutput.accept(ItemRegistry.ANCIENT_FEATHER);
                       pOutput.accept(BlockRegistry.RESEARCH_TABLE);
-                      pOutput.accept(ItemRegistry.NITOR);
-                      pOutput.accept(BlockRegistry.NIMBUS_STONE);
+                        for (DyeColor color : DyeColor.values()) {
+                            ItemStack stack = new ItemStack(ItemRegistry.NITOR.get());
+                            stack.set(DataComponents.DYED_COLOR, new DyedItemColor(color.getTextureDiffuseColor(), false));
+                            pOutput.accept(stack);
+                        }
+                      //pOutput.accept(BlockRegistry.NIMBUS_STONE);
 
                     }).build());
 
