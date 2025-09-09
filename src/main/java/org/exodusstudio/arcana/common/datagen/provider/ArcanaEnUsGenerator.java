@@ -45,6 +45,7 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
         add("arcana.message.scribbling_tool_no_map", "You need more paper to take notes");
         add("arcana.message.research_table_not_found", "Place two research tables nearby");
         add("arcana.message.research_table_note_found", "You already studied this");
+        add("arcana.message.notes_already_taken", "Cant take more notes of this...");
         addItem(ItemRegistry.SCRIBBLING_TOOL, "Scribbling Tool");
         addItem(ItemRegistry.SCRIBBLED_NOTE, "Scribbled Note");
         addItem(ItemRegistry.NHIL_CRYSTAL, "Nhil Crystal");
@@ -55,5 +56,7 @@ public class ArcanaEnUsGenerator extends LanguageProvider {
         addBlock(BlockRegistry.RESEARCH_TABLE, "Research Table");
         addItem(BlockRegistry.getItemFromBlock(BlockRegistry.RESEARCH_TABLE), "Research Table");
         //addItem(BlockRegistry.getItemFromBlock(BlockRegistry.NIMBUS_STONE),"Nimbus Stone");
+        addItem(ItemRegistry.MATE, "Matecitoooo");
+        addBlock(BlockRegistry.BOILER_BLOCK, "Boiler");
     }
 }

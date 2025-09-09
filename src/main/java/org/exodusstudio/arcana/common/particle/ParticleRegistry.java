@@ -15,11 +15,14 @@ public class ParticleRegistry {
             DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, Arcana.MODID);
 
 
-    public static final Supplier<SimpleParticleType> EVAPORTAION_PARTICLE =
+    public static final Supplier<SimpleParticleType> EVAPORATION_PARTICLE =
             PARTICLE_TYPES.register("evaporation_particle", () -> new SimpleParticleType(true));
 
     public static final Supplier<SimpleParticleType> BOILING_PARTICLE =
             PARTICLE_TYPES.register("boiling_particle", () -> new SimpleParticleType(true));
+
+    public static final Supplier<SimpleParticleType> RESEARCH_PARTICLE =
+            PARTICLE_TYPES.register("research_particle", () -> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus){
         PARTICLE_TYPES.register(eventBus);
