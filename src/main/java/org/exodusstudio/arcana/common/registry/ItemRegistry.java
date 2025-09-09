@@ -7,10 +7,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
-import org.exodusstudio.arcana.common.item.ArcanaNitorItem;
-import org.exodusstudio.arcana.common.item.ArcanaOldNoteItem;
-import org.exodusstudio.arcana.common.item.ArcanaScribbledNoteItem;
-import org.exodusstudio.arcana.common.item.ArcanaScribblingToolItem;
+import org.exodusstudio.arcana.common.item.*;
 
 import java.awt.*;
 
@@ -28,10 +25,13 @@ public class ItemRegistry {
     public static final DeferredItem<Item> OLD_NOTE = ITEMS.registerItem("old_note",
             ArcanaOldNoteItem::new,
             new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> MATE = ITEMS.registerItem("mate",
+            ArcanaMateItem::new,
+            new Item.Properties().stacksTo(1));
     public static final DeferredItem<BlockItem> NITOR = ITEMS.registerSimpleBlockItem("nitor",
             () -> BlockRegistry.NITOR_BLOCK.get(), //dont follow the yellow it lies
-            new Item.Properties().stacksTo(1)
-            );
+            new Item.Properties().stacksTo(1));
+
     public static final DeferredItem<Item> NHIL_CRYSTAL = ITEMS.registerSimpleItem("nhil_crystal");
     public static final DeferredItem<Item> INK_BOTTLE = ITEMS.registerSimpleItem("ink_bottle");
     public static final DeferredItem<Item> ANCIENT_FEATHER = ITEMS.registerSimpleItem("ancient_feather");

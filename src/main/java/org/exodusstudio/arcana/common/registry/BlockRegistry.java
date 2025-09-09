@@ -13,6 +13,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.Arcana;
 
 //import org.exodusstudio.arcana.common.block.NimbusStone;
+import org.exodusstudio.arcana.common.block.BoilerBlock;
 import org.exodusstudio.arcana.common.block.NitorBlock;
 import org.exodusstudio.arcana.common.block.ResearchTable;
 
@@ -35,6 +36,9 @@ public class BlockRegistry {
     public static final DeferredBlock<NitorBlock> NITOR_BLOCK = registerSpecificBlock("nitor_block", NitorBlock.class,
             BlockBehaviour.Properties.of().noCollission().instabreak().noOcclusion(),
             new Item.Properties().stacksTo(1));
+
+    public static final DeferredBlock<BoilerBlock> BOILER_BLOCK = registerSpecificBlock("boiler", BoilerBlock.class, BlockBehaviour.Properties.of().strength(5.3f, 6.0f).noOcclusion(),
+    new Item.Properties().stacksTo(1));
 
     //public static final DeferredBlock<NimbusStone> NIMBUS_STONE = registerSpecificBlock("nimbus_stone", NimbusStone.class,
     //        BlockBehaviour.Properties.of().strength(2.0f, 1.0f).requiresCorrectToolForDrops().noOcclusion(),

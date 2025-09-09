@@ -5,5 +5,5 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 
 public class NhilTheory extends Theory{
-    public NhilTheory() {super(1, "Nhil Theory", null, ItemRegistry.NHIL_CRYSTAL);}
+    public NhilTheory() {super(3, "Nhil Theory", null, ItemRegistry.NHIL_CRYSTAL);}
 }

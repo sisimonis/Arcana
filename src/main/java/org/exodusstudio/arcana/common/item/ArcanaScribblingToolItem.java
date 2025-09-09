@@ -10,11 +10,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.exodusstudio.arcana.common.component.ScribbledNoteData;
 import org.exodusstudio.arcana.common.registry.DataComponentRegistry;
 import org.exodusstudio.arcana.common.registry.ItemRegistry;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class ArcanaScribblingToolItem extends Item {
@@ -22,10 +27,13 @@ public class ArcanaScribblingToolItem extends Item {
         super(properties);
     }
 
+    final List<Block> blocks = new ArrayList<>();
+
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
+        Block clickedBlock = world.getBlockState(context.getClickedPos()).getBlock();
         Player player = context.getPlayer();
         BlockState blockState = world.getBlockState(pos);
         //Also needs to be able to collect Item data -Pyr0
@@ -41,13 +49,16 @@ public class ArcanaScribblingToolItem extends Item {
             for(int i = 0; i < playerInventory.getContainerSize(); i++) {
                 ItemStack currentItemStack = playerInventory.getItem(i);
                 if (currentItemStack.getItem().equals(Items.PAPER)) {
-                    itemFound = true;
-                    itemStack = currentItemStack;
-                    itemStackIndex = i;
+                    if (!blocks.contains(clickedBlock)){
+                        blocks.add(clickedBlock);
+                        itemFound = true;
+                        itemStack = currentItemStack;
+                        itemStackIndex = i;
+                    }
                     break;
                 }
             }
-            //Should also check if the block has already been taken notes of -Pyr0
+            //Should also check if the block has already been taken notes of -Pyr0 (Update: now it does check if the blocks has already been taken notes of -Pyr0)
             if(itemFound) {
                 playerInventory.removeItem(itemStackIndex, 1);
                 ItemStack scribbledNote = new ItemStack(ItemRegistry.SCRIBBLED_NOTE.get());
@@ -57,7 +68,12 @@ public class ArcanaScribblingToolItem extends Item {
                 playerInventory.add(scribbledNote);
             } else {
                 //No empty map on his inventory
-                player.displayClientMessage(Component.translatable("arcana.message.scribbling_tool_no_map"), true);
+                if (blocks.contains(clickedBlock)){
+                    player.displayClientMessage(Component.translatable("arcana.message.notes_already_taken"), true);
+                }
+                else {
+                    player.displayClientMessage(Component.translatable("arcana.message.scribbling_tool_no_map"), true);
+                }
             }
         }
 

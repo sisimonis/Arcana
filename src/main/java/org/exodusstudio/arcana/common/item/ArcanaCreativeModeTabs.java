@@ -32,13 +32,14 @@ public class ArcanaCreativeModeTabs {
                       pOutput.accept(ItemRegistry.INK_BOTTLE);
                       pOutput.accept(ItemRegistry.ANCIENT_FEATHER);
                       pOutput.accept(BlockRegistry.RESEARCH_TABLE);
+                      pOutput.accept(BlockRegistry.BOILER_BLOCK);
+                      pOutput.accept(ItemRegistry.MATE);
                         for (DyeColor color : DyeColor.values()) {
                             ItemStack stack = new ItemStack(ItemRegistry.NITOR.get());
                             stack.set(DataComponents.DYED_COLOR, new DyedItemColor(color.getTextureDiffuseColor(), false));
                             pOutput.accept(stack);
                         }
                       //pOutput.accept(BlockRegistry.NIMBUS_STONE);
-
                     }).build());
 
     public static void register(IEventBus eventBus)
